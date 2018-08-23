@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/employee_wage"
+            android:icon="@drawable/wage"
+            android:title="员工工资" />
+        <item
+            android:id="@+id/product_wage"
+            android:icon="@drawable/product_total_list"
+            android:title="结算统计" />
+        <item
+            android:id="@+id/employee_manage"
+            android:icon="@drawable/employee"
+            android:title="员工管理" />
+        <item
+            android:id="@+id/product_manage"
+            android:icon="@drawable/product"
+            android:title="产品管理" />
+        <item
+            android:id="@+id/record_manage"
+            android:icon="@drawable/record"
+            android:title="记录管理" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/up"
+                android:title="上传" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/down"
+                android:title="下载" />
+        </menu>
+    </item>
+
+</menu>
