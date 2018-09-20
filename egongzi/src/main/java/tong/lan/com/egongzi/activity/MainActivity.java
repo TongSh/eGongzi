@@ -1,5 +1,6 @@
 package tong.lan.com.egongzi.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -24,6 +25,10 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.daimajia.swipe.util.Attributes;
+import com.facebook.stetho.Stetho;
+import com.facebook.stetho.okhttp3.StethoInterceptor;
+
+import okhttp3.OkHttpClient;
 import tong.lan.com.egongzi.R;
 import tong.lan.com.egongzi.bean.RecordBean;
 import tong.lan.com.egongzi.domain.Employee;
@@ -36,8 +41,11 @@ import tong.lan.com.egongzi.utils.update;
 import org.litepal.crud.DataSupport;
 import org.litepal.tablemanager.Connector;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,6 +62,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        init();
         setContentView(R.layout.activity_main);
         nettool = new update(this);
         context = this;
@@ -75,8 +84,9 @@ public class MainActivity extends AppCompatActivity
                 String date_now = calendar.get(Calendar.YEAR) + "-" + (calendar.get(Calendar.MONTH) + 1) + "-" + calendar.get(Calendar.DAY_OF_MONTH);
                 //弹出新增对话框
                 createUserDialog = new RecordDialog((Activity) context,0,0,date_now,0,R.style.Theme_AppCompat_Dialog,new View.OnClickListener() {
+                    @SuppressLint("SimpleDateFormat")
                     @Override
-                    public void onClick(View view) {
+                    public void onClick(View view){
                         switch (view.getId()) {
                             case R.id.btn_cancel_pop:
                                 createUserDialog.dismiss();
@@ -87,39 +97,44 @@ public class MainActivity extends AppCompatActivity
                                 int productId = Integer.parseInt(createUserDialog.getRecordProduct().getSelectedItem().toString().split(" ")[0]);
                                 final String date = createUserDialog.getRecordDate().getText().toString().trim();
                                 final int amount = Integer.parseInt(createUserDialog.getRecordAmount().getText().toString().trim());
-                                if (!date.isEmpty()) {
-                                    //创建要保存的类对象
-                                    final Product product = DataSupport.find(Product.class,productId);
-                                    final Employee employee = DataSupport.find(Employee.class,employeeId);
-                                    Log.i("产品id------------",""+product.getId());
-                                    final Make make = new Make(employee,product,date,amount);
+                                //创建要保存的类对象
+                                final Product product = DataSupport.find(Product.class,productId);
+                                final Employee employee = DataSupport.find(Employee.class,employeeId);
+                                Log.i("产品id------------",""+product.getId());
 
-                                    //确认对话框
-                                    final AlertDialog.Builder builder2 = new AlertDialog.Builder(context);
-                                    builder2.setTitle("添加生产记录");
-                                    builder2.setIcon(R.drawable.addrecord);
-                                    builder2.setMessage("记录信息确认:\n时间："+date+"\n生产者："+employee.getEmployeeName()+"\n产量："+amount+" "+product.getProductName()+product.getProductType());
-                                    builder2.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            if (make.save()) {
-                                                //存储成功
-                                                lists.add(0,new RecordBean(make.getId(),product,employee,date,amount));
-                                                adapter.notifyDataSetChanged();
-                                            }
+                                //确认对话框
+                                final AlertDialog.Builder builder2 = new AlertDialog.Builder(context);
+                                builder2.setTitle("添加生产记录");
+                                builder2.setIcon(R.drawable.addrecord);
+                                builder2.setMessage("记录信息确认:\n时间："+date+"\n生产者："+employee.getEmployeeName()+"\n产量："+amount+" "+product.getProductName()+product.getProductType());
+                                builder2.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Make make = null;
+                                        try {
+                                            make = new Make(employee,
+                                                    product,
+                                                    new SimpleDateFormat("yyyy-MM-dd").parse(date),
+                                                    amount);
+                                        } catch (ParseException e) {
+                                            e.printStackTrace();
                                         }
-                                    });
-                                    builder2.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
+                                        assert make != null;
+                                        if (make.save()) {
+                                            //存储成功
+                                            lists.add(0,new RecordBean(make.getId(),product,employee,date,amount));
+                                            adapter.notifyDataSetChanged();
                                         }
-                                    });
-                                    builder2.show();
+                                    }
+                                });
+                                builder2.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                    }
+                                });
+                                builder2.show();
 
-                                    createUserDialog.dismiss();
-                                }else {
-                                    Toast.makeText(context, "未填写完整！", Toast.LENGTH_SHORT).show();
-                                }
+                                createUserDialog.dismiss();
                                 break;
 
                             default:
@@ -140,6 +155,13 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    private void init(){
+        Stetho.initializeWithDefaults(this);
+        new OkHttpClient.Builder()
+                .addNetworkInterceptor(new StethoInterceptor())
+                .build();
     }
 
     @Override
@@ -211,7 +233,7 @@ public class MainActivity extends AppCompatActivity
         lists=new ArrayList<RecordBean>();
         List<Make> myList = DataSupport.findAll(Make.class,true);
         for (int i=myList.size()-1;i>=0;--i){
-            lists.add(new RecordBean(myList.get(i).getId(),myList.get(i).getProduct(),myList.get(i).getEmployee(),myList.get(i).getMakeDate(),myList.get(i).getMakeAmount()));
+            lists.add(new RecordBean(myList.get(i).getId(),myList.get(i).getProduct(),myList.get(i).getEmployee(),myList.get(i).getMakeDate().toString(),myList.get(i).getMakeAmount()));
         }
         adapter=new RecordAdapter(this,lists);
         listView.setAdapter(adapter);

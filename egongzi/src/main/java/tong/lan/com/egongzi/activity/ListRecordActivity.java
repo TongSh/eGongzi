@@ -28,6 +28,7 @@ import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -58,7 +59,6 @@ public class ListRecordActivity extends AppCompatActivity {
                         switch (view.getId()) {
                             case R.id.btn_cancel_pop:
                                 createUserDialog.dismiss();
-                                Log.i("点击================","取消");
                                 break;
                             case R.id.btn_save_pop:
                                 int employeeId = Integer.parseInt(createUserDialog.getRecordEmployee().getSelectedItem().toString().split(" ")[0]);
@@ -70,7 +70,7 @@ public class ListRecordActivity extends AppCompatActivity {
                                     final Product product = DataSupport.find(Product.class,productId);
                                     final Employee employee = DataSupport.find(Employee.class,employeeId);
                                     Log.i("产品id------------",""+product.getId());
-                                    final Make make = new Make(employee,product,date,amount);
+                                    final Make make = new Make(employee,product,new Date(date),amount);
 
                                     //确认对话框
                                     final AlertDialog.Builder builder2 = new AlertDialog.Builder(context);
@@ -117,7 +117,7 @@ public class ListRecordActivity extends AppCompatActivity {
         lists=new ArrayList<RecordBean>();
         List<Make> myList = DataSupport.findAll(Make.class,true);
         for (int i=myList.size()-1;i>=0;--i){
-            lists.add(new RecordBean(myList.get(i).getId(),myList.get(i).getProduct(),myList.get(i).getEmployee(),myList.get(i).getMakeDate(),myList.get(i).getMakeAmount()));
+            lists.add(new RecordBean(myList.get(i).getId(),myList.get(i).getProduct(),myList.get(i).getEmployee(),myList.get(i).getMakeDate().toString(),myList.get(i).getMakeAmount()));
         }
         adapter=new RecordAdapter(ListRecordActivity.this,lists);
         listView.setAdapter(adapter);

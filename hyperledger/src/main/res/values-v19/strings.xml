@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="save_product">产品信息将保存到本地数据库中</string>
+</resources>

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">超级账本</string>
+    <string name="cname">超级账本</string>
+    <string name="save_product">产品信息将保存到本地数据库中</string>
+    <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
+    <string name="welcome">欢迎使用超级账本记账工具！ 欢迎使用超级账本记账工具！</string>
+</resources>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="@color/white"
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:id="@+id/id_tab_home"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical" >
+        <ImageButton
+            android:id="@+id/id_tab_home_img"
+            android:scaleType="centerInside"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/white"
+            android:clickable="false"
+            android:src="@mipmap/icon_4_9" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="首页"
+            android:textColor="#000"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/id_tab_1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical" >
+        <!-- android:clickable="false" 是为了防止ImageButton截取了触摸事件 ，这里事件要给它的上一级linearlayout-->
+        <ImageButton
+            android:id="@+id/id_tab_weixin_img"
+            android:scaleType="centerInside"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/white"
+            android:clickable="false"
+            android:src="@mipmap/icon_4_28" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:text="工资"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/id_tab_3"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <ImageButton
+            android:id="@+id/id_tab_frd_img"
+            android:scaleType="centerInside"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/white"
+            android:clickable="false"
+            android:src="@mipmap/icon_4_26" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:text="产品"
+            />
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/id_tab_2"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <ImageButton
+            android:id="@+id/id_tab_address_img"
+            android:scaleType="centerInside"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/white"
+            android:clickable="false"
+            android:src="@mipmap/icon_4_16" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:text="员工"
+            />
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/id_tab_4"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <ImageButton
+            android:id="@+id/id_tab_settings_img"
+            android:scaleType="centerInside"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/white"
+            android:clickable="false"
+            android:src="@mipmap/icon_4_18" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:text="管理"
+            />
+    </LinearLayout>
+
+</LinearLayout>

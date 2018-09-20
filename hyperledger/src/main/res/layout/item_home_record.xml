@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/item_home_record_employee_first_name"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="张"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:background="@drawable/circle_big"
+        android:layout_marginLeft="10dp"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="50dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/item_home_record_employee"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="张浩"
+            android:layout_marginStart="20dp"
+            android:textSize="16sp"
+            android:textColor="#000"/>
+        <TextView
+            android:id="@+id/item_home_record_product"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="内衬621 * 100"
+            android:layout_marginStart="20dp"
+            android:textSize="14sp"
+            android:textColor="@color/color_grey"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="50dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/item_home_record_wage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="102"
+            android:textSize="20sp"
+            android:layout_gravity="right"
+            android:layout_marginEnd="20dp"
+            android:textColor="@color/color_4bae4f"/>
+        <TextView
+            android:id="@+id/item_home_record_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="09-18"
+            android:layout_gravity="right"
+            android:layout_marginEnd="20dp"
+            android:textSize="14sp"
+            android:textColor="@color/color_grey"/>
+    </LinearLayout>
+
+</LinearLayout>

@@ -76,16 +76,12 @@ public class ProductTotalActivity extends AppCompatActivity {
             for (int k = 0; k < makeList.size(); k++)
             {
                 //处理记录的时间
-                try {
-                    Date date = new SimpleDateFormat("yyyy-MM-dd").parse(makeList.get(k).getMakeDate());
-                    System.out.println(DateFormat.getDateInstance().format(date));
-                    int m = date.getMonth();
-                    if(m != mon)
-                    {
-                        continue;
-                    }
-                } catch (ParseException e) {
-                    e.printStackTrace();
+                Date date = makeList.get(k).getMakeDate();
+                System.out.println(DateFormat.getDateInstance().format(date));
+                int m = date.getMonth();
+                if(m != mon)
+                {
+                    continue;
                 }
                 pAmount += makeList.get(k).getMakeAmount();
             }

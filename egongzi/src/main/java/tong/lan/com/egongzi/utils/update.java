@@ -21,6 +21,7 @@ import org.xutils.view.annotation.Event;
 import org.xutils.x;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -132,7 +133,7 @@ public class update {
                             //安卓端数据库没有这条记录，加进去
                             record = new Make();
                             record.setMakeAmount(recordJsonObject.getInteger("rAmount"));
-                            record.setMakeDate(recordJsonObject.getString("rDate"));
+                            record.setMakeDate(new Date(recordJsonObject.getString("rDate")));
                             record.setEmployee(rEmployee);
                             record.setProduct(rProduct);
                             Log.i("添加=------",recordJsonObject.getString("rDate")+rEmployee.getEmployeeName());

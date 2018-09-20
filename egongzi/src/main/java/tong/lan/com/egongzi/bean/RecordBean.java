@@ -1,5 +1,7 @@
 package tong.lan.com.egongzi.bean;
 
+import java.util.Date;
+
 import tong.lan.com.egongzi.domain.Employee;
 import tong.lan.com.egongzi.domain.Product;
 

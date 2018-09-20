@@ -42,7 +42,9 @@
         <activity android:name=".activity.ListProductActivity" />
         <activity android:name=".activity.ListRecordActivity" />
         <activity android:name=".activity.WageActivity" />
-        <activity android:name=".activity.WageDetailActivity"></activity>
+        <activity android:name=".activity.WageDetailActivity">
+
+        </activity>
         <activity android:name=".activity.ProductTotalActivity"></activity>
     </application>
 </manifest>

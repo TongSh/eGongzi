@@ -1,0 +1,14 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="@color/lightGreen"
+    android:orientation="horizontal">
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:text="工资详情"
+    android:textSize="30sp"
+    android:textColor="#FFF"
+    android:layout_marginLeft="10dp"/>
+
+</LinearLayout>

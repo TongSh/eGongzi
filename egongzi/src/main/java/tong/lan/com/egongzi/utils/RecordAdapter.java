@@ -22,6 +22,7 @@ import com.daimajia.swipe.adapters.BaseSwipeAdapter;
 import org.litepal.crud.DataSupport;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import okhttp3.Call;
@@ -143,12 +144,14 @@ public class RecordAdapter extends BaseSwipeAdapter {
                                 Product product = DataSupport.find(Product.class,productId);
                                 Employee employee = DataSupport.find(Employee.class,employeeId);
                                 //更新内容
-                                ContentValues values = new ContentValues();
-                                values.put("employee_id", employeeId);
-                                values.put("product_id",productId);
-                                values.put("makedate",date);
-                                values.put("makeamount",amount);
-                                DataSupport.update(Make.class,values,items.get(i).getId());
+                                Make make_update = new Make(employee,product,new Date(date),amount);
+                                make_update.update(items.get(i).getId());
+//                                ContentValues values = new ContentValues();
+//                                values.put("employee_id", employeeId);
+//                                values.put("product_id",productId);
+//                                values.put("makedate", new Date(date));
+//                                values.put("makeamount",amount);
+//                                DataSupport.update(Make.class,values,items.get(i).getId());
                                 items.get(i).setRecordProduct(product);
                                 items.get(i).setRecordEmployee(employee);
                                 items.get(i).setRecordDate(date);
@@ -172,7 +175,9 @@ public class RecordAdapter extends BaseSwipeAdapter {
         record_employee_item.setText(items.get(i).getRecordEmployee().getEmployeeName());
         record_product_item.setText(String.format("%s%s", items.get(i).getRecordProduct().getProductType(), items.get(i).getRecordProduct().getProductName()));
         record_amount_item.setText(String.valueOf(items.get(i).getRecordAmount()));
-        record_wage_item.setText(String.valueOf(items.get(i).getRecordAmount() * items.get(i).getRecordProduct().getProductWage()));
+        double wage = items.get(i).getRecordAmount()*items.get(i).getRecordProduct().getProductWage();
+        record_wage_item.setText(String.format("%." + 2 + "f", wage));
+//        record_wage_item.setText(String.valueOf(items.get(i).getRecordAmount() * items.get(i).getRecordProduct().getProductWage()));
     }
 
 

@@ -1,1 +1,1 @@
-include ':app', ':egongzi'
+include ':app', ':egongzi', ':date', ':hyperledger', ':alipay'

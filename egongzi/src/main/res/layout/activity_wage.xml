@@ -33,7 +33,23 @@
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:gravity="center"
-                    android:text="查询月份："
+                    android:text="年"
+                    android:textSize="20dp"
+                    android:textColor="#fff"/>
+                <Spinner
+                    android:id="@+id/wage_year"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/edit2"
+                    android:popupBackground="@drawable/spinner2"
+                    android:layout_marginStart="20dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:text="   月"
                     android:textSize="20dp"
                     android:textColor="#fff"/>
 

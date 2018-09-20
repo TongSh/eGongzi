@@ -1,0 +1,109 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:background="@color/lightGreen"
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/wage_detail_date"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingStart="10dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <TextView
+            android:id="@+id/wage_detail_year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2018"
+            android:textColor="@color/color_EAEAEA"
+            android:textSize="16sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="年"
+            android:textColor="@color/color_EAEAEA"
+            android:textSize="16sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/wage_detail_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="08"
+                android:textColor="@color/white"
+                android:textSize="36sp"
+                android:layout_gravity="bottom"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="月"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="4dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/dash_vertical_line"
+        android:contentDescription="@string/app_name"
+        android:layerType="software" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingStart="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="当月工资（元）"
+            android:textColor="@color/color_EAEAEA"
+            android:textSize="16sp"/>
+        <TextView
+            android:id="@+id/wage_detail_toltal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1602"
+            android:textColor="@color/white"
+            android:textSize="26sp"
+            android:layout_marginTop="20dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingStart="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="日均工资（元）"
+            android:textColor="@color/color_EAEAEA"
+            android:textSize="16sp"/>
+        <TextView
+            android:id="@+id/wage_detail_average"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="87"
+            android:textColor="@color/white"
+            android:textSize="26sp"
+            android:layout_marginTop="20dp"/>
+    </LinearLayout>
+</LinearLayout>
