@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import org.angmarch.views.NiceSpinner;
+import org.litepal.crud.DataSupport;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
@@ -22,6 +23,7 @@ import java.util.List;
 import tong.lan.com.hyperledger.R;
 import tong.lan.com.hyperledger.domain.Employee;
 import tong.lan.com.hyperledger.domain.Product;
+import tong.lan.com.hyperledger.domain.ProductType;
 
 @ContentView(R.layout.activity_add_product)
 public class AddProductActivity extends AppCompatActivity {
@@ -43,8 +45,12 @@ public class AddProductActivity extends AppCompatActivity {
     }
 
     void initSpinner(){
-        spinnerData = new ArrayList<>(Arrays.asList("内衬", "护托", "耳朵", "商标",
-                "拖把", "其他"));
+        spinnerData = new ArrayList<>();
+        spinnerData.add("其他");
+        List<ProductType> mData = DataSupport.findAll(ProductType.class);
+        for(ProductType item : mData){
+            spinnerData.add(item.getType());
+        }
         mProductType.attachDataSource(spinnerData);
         mProductType.setTextColor(Color.BLACK);
         mProductType.setTextSize(18);

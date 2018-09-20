@@ -8,7 +8,7 @@
     <!--
         定义数据库的版本号
     -->
-    <version value="1" ></version>
+    <version value="2" ></version>
 
     <!--
         定义所有的映射模型，LitePal会对每一个表创建映射类
@@ -22,5 +22,6 @@
         <mapping class="tong.lan.com.hyperledger.domain.Employee"></mapping>
         <mapping class="tong.lan.com.hyperledger.domain.Make"></mapping>
         <mapping class="tong.lan.com.hyperledger.domain.Product"></mapping>
+        <mapping class="tong.lan.com.hyperledger.domain.ProductType"></mapping>
     </list>
 </litepal>

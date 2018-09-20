@@ -109,7 +109,7 @@
                 android:layout_height="60dp"
                 android:background="@color/white"
                 android:hint="数量"
-                android:inputType="numberDecimal"/>
+                android:inputType="number"/>
 
             <View
                 android:layout_width="match_parent"
