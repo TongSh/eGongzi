@@ -1,25 +1,18 @@
 package tong.lan.com.hyperledger.activity;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,16 +30,14 @@ import java.util.Map;
 import java.util.Set;
 
 import tong.lan.com.hyperledger.R;
-import tong.lan.com.hyperledger.adapter.RecordAdapter;
 import tong.lan.com.hyperledger.adapter.WageAdapter;
-import tong.lan.com.hyperledger.bean.RecordBean;
 import tong.lan.com.hyperledger.bean.WageBean;
 import tong.lan.com.hyperledger.domain.Employee;
 import tong.lan.com.hyperledger.domain.Make;
 import tong.lan.com.hyperledger.utils.DateUtil;
 import tong.lan.com.hyperledger.utils.SaveImg;
 
-public class TabOneFragment extends Fragment implements DatePickerDialog.OnDateSetListener {
+public class TabWageFragment extends Fragment implements DatePickerDialog.OnDateSetListener {
 
     private LinearLayout searchMonth;
     private TextView mYear;
@@ -59,7 +50,7 @@ public class TabOneFragment extends Fragment implements DatePickerDialog.OnDateS
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,  Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.tab_01,null);
+        View view = inflater.inflate(R.layout.tab_wage,null);
         initUnit(view);
         initListener();
         setData();
@@ -92,7 +83,7 @@ public class TabOneFragment extends Fragment implements DatePickerDialog.OnDateS
             public void onClick(View v) {
                 Calendar now = Calendar.getInstance();
                 DatePickerDialog dpd = DatePickerDialog.newInstance(
-                        TabOneFragment.this,
+                        TabWageFragment.this,
                         now.get(Calendar.YEAR), // Initial year selection
                         now.get(Calendar.MONTH), // Initial month selection
                         now.get(Calendar.DAY_OF_MONTH) // Inital day selection
@@ -156,7 +147,7 @@ public class TabOneFragment extends Fragment implements DatePickerDialog.OnDateS
         for (Make make : makeList)
         {
             int eID = make.getEmployee().getId();
-            double eWage = make.getMakeAmount()*make.getProduct().getProductWage();
+            double eWage = make.getMakeAmount()*make.getProduct().getWage();
             if(wage.containsKey(eID)) {
                 wage.put(eID, wage.get(eID) + eWage);
                 workDay.get(eID).add(make.getMakeDate());

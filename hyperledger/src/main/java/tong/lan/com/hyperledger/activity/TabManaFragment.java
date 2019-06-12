@@ -7,18 +7,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import tong.lan.com.hyperledger.R;
 import tong.lan.com.hyperledger.utils.DbBackups;
 
-public class TabFourFragment extends Fragment{
+public class TabManaFragment extends Fragment{
 
     private LinearLayout mProductType;
     private LinearLayout mDbBackup;
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,  Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.tab_04,null);
+        View view = inflater.inflate(R.layout.tab_mana,null);
         initUnit(view);
         initListener();
         return view;
@@ -33,8 +34,7 @@ public class TabFourFragment extends Fragment{
         mProductType.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),AddProductTypeActivity.class);
-                startActivity(intent);
+                Toast.makeText(getContext(),"Type",Toast.LENGTH_LONG);
             }
         });
 

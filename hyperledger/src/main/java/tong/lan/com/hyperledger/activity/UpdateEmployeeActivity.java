@@ -21,8 +21,6 @@ public class UpdateEmployeeActivity extends AppCompatActivity {
 
     @ViewInject(R.id.update_employee_name)
     private EditText employeeName;
-    @ViewInject(R.id.update_employee_phone)
-    private EditText employeePhone;
     @ViewInject(R.id.update_employee_title)
     private TextView title;
 
@@ -35,7 +33,6 @@ public class UpdateEmployeeActivity extends AppCompatActivity {
         Intent intent = getIntent();
         eID = intent.getIntExtra("eID",0);
         employeeName.setText(intent.getStringExtra("eName"));
-        employeePhone.setText(intent.getStringExtra("ePhone"));
         title.setText("更新员工信息");
     }
 
@@ -44,18 +41,16 @@ public class UpdateEmployeeActivity extends AppCompatActivity {
     private void submit(View v)
     {
         String employee_name = employeeName.getText().toString();
-        String employee_phone = employeePhone.getText().toString();
         if (!employee_name.isEmpty()) {
             Employee mEmployee = new Employee();
             mEmployee.setEmployeeName(employee_name);
-            mEmployee.setEmployeePhone(employee_phone);
             if (mEmployee.update(eID) == 1) {
                 Toast.makeText(this, "存储成功", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "存储失败", Toast.LENGTH_SHORT).show();
             }
-            Intent intent = new Intent(UpdateEmployeeActivity.this, MainActivity.class);
-            startActivity(intent);
+//            Intent intent = new Intent(UpdateEmployeeActivity.this, MainActivity.class);
+//            startActivity(intent);
             finish();
         }
         else {
@@ -67,8 +62,8 @@ public class UpdateEmployeeActivity extends AppCompatActivity {
     @Event(value = {R.id.update_employee_cancel},type = View.OnClickListener.class)
     private void addEmployeeBack(View v)
     {
-        Intent intent = new Intent(UpdateEmployeeActivity.this, MainActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(UpdateEmployeeActivity.this, MainActivity.class);
+//        startActivity(intent);
         finish();
     }
 }

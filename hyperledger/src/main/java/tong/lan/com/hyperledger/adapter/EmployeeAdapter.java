@@ -12,8 +12,6 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.github.lzyzsd.randomcolor.RandomColor;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -21,19 +19,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Random;
 
 import tong.lan.com.hyperledger.R;
-import tong.lan.com.hyperledger.bean.EmployeeBean;
+import tong.lan.com.hyperledger.bean.EmployeeListBean;
 import tong.lan.com.hyperledger.utils.Utils;
 
 public class EmployeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private LayoutInflater mLayoutInflater;
     private Context mContext;
-    private List<EmployeeBean> mEmployees; // 联系人名称字符串数组
+    private List<EmployeeListBean> mEmployees; // 联系人名称字符串数组
     private List<String> mEmployeeList; // 联系人名称List（转换成拼音）
-    private List<EmployeeBean> resultList; // 最终结果（包含分组的字母）
+    private List<EmployeeListBean> resultList; // 最终结果（包含分组的字母）
     private List<String> characterList; // 字母List
 
     private String[] mColor;
@@ -44,7 +41,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         ITEM_TYPE_CONTACT
     }
 
-    public EmployeeAdapter(Context context, List<EmployeeBean> employeeNames) {
+    public EmployeeAdapter(Context context, List<EmployeeListBean> employeeNames) {
         mContext = context;
         mLayoutInflater = LayoutInflater.from(context);
         mEmployees = employeeNames;
@@ -82,9 +79,9 @@ public class EmployeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private void handleData() {
         mEmployeeList = new ArrayList<>();
-        Map<String, EmployeeBean> map = new HashMap<>();
+        Map<String, EmployeeListBean> map = new HashMap<>();
 
-        for (EmployeeBean mEmployee : mEmployees) {
+        for (EmployeeListBean mEmployee : mEmployees) {
             String pinyin = Utils.getPingYin(mEmployee.getEmployeeName());
             map.put(pinyin, mEmployee);
             mEmployeeList.add(pinyin);
@@ -100,18 +97,17 @@ public class EmployeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             if (!characterList.contains(character)) {
                 if (character.hashCode() >= "A".hashCode() && character.hashCode() <= "Z".hashCode()) { // 是字母
                     characterList.add(character);
-                    resultList.add(new EmployeeBean(character, ITEM_TYPE.ITEM_TYPE_CHARACTER.ordinal()));
+                    resultList.add(new EmployeeListBean(character, ITEM_TYPE.ITEM_TYPE_CHARACTER.ordinal()));
                 } else {
                     if (!characterList.contains("#")) {
                         characterList.add("#");
-                        resultList.add(new EmployeeBean("#", ITEM_TYPE.ITEM_TYPE_CHARACTER.ordinal()));
+                        resultList.add(new EmployeeListBean("#", ITEM_TYPE.ITEM_TYPE_CHARACTER.ordinal()));
                     }
                 }
             }
 
-            resultList.add(new EmployeeBean(map.get(name).getId(),
+            resultList.add(new EmployeeListBean(map.get(name).getId(),
                     map.get(name).getEmployeeName(),
-                    map.get(name).getEmployeePhone(),
                     ITEM_TYPE.ITEM_TYPE_CONTACT.ordinal()));
         }
     }

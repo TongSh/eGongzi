@@ -1,48 +1,34 @@
 package tong.lan.com.hyperledger.activity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
-import org.angmarch.views.NiceSpinner;
 import org.litepal.crud.DataSupport;
 import org.xutils.view.annotation.ContentView;
-import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import tong.lan.com.hyperledger.R;
-import tong.lan.com.hyperledger.adapter.WageAdapter;
 import tong.lan.com.hyperledger.adapter.WageDetailAdapter;
-import tong.lan.com.hyperledger.bean.RecordBean;
-import tong.lan.com.hyperledger.bean.WageBean;
 import tong.lan.com.hyperledger.bean.WageDetailBean;
 import tong.lan.com.hyperledger.domain.Employee;
 import tong.lan.com.hyperledger.domain.Make;
@@ -108,7 +94,7 @@ public class WageDetailActivity extends AppCompatActivity implements DatePickerD
         mData = new ArrayList<>();
         for (Make make : makeList)
         {
-            double singleWage = make.getMakeAmount()*make.getProduct().getProductWage();
+            double singleWage = make.getMakeAmount()*make.getProduct().getWage();
             wage += singleWage;
             workDay.add(make.getMakeDate());
             Employee e = make.getEmployee();
@@ -119,7 +105,7 @@ public class WageDetailActivity extends AppCompatActivity implements DatePickerD
             date = date.split("-")[1]+"-"+date.split("-")[2];
             mData.add(new WageDetailBean(e.getId(),
                     e.getEmployeeName(),
-                    p.getProductType()+" "+p.getProductName(),
+                    p.getName(),
                     make.getMakeAmount(),
                     date,
                     singleWage));

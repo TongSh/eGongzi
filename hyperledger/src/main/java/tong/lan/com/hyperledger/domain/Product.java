@@ -11,6 +11,18 @@ import java.util.List;
  */
 public class Product extends DataSupport {
 	private int id;
+	private String Name;//产品名称
+	private double Wage;//工人工价
+	private List<Make> make;//一个产品对应多条生产记录
+
+	public Product(String Name, double Wage) {
+		this.Name = Name;
+		this.Wage = Wage;
+		make = new ArrayList<Make>();
+	}
+
+	public Product() {
+	}
 
 	public int getId() {
 		return id;
@@ -18,23 +30,6 @@ public class Product extends DataSupport {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	private String productName;//产品名称
-	private String productType;//产品类型
-	private double productWage;//工人工价
-	private double productMargin;//产品利润
-	private List<Make> make;//一个产品对应多条生产记录
-
-	public Product(String productName, String productType, double productWage, double productMargin) {
-		this.productName = productName;
-		this.productType = productType;
-		this.productWage = productWage;
-		this.productMargin = productMargin;
-		make = new ArrayList<Make>();
-	}
-
-	public Product() {
 	}
 
 	public List<Make> getMake() {
@@ -45,35 +40,19 @@ public class Product extends DataSupport {
 		this.make = make;
 	}
 
-	public String getProductName() {
-		return this.productName;
+	public String getName() {
+		return this.Name;
 	}
 
-	public void setProductName(String productName) {
-		this.productName = productName;
+	public void setName(String name) {
+		this.Name = name;
 	}
 
-	public String getProductType() {
-		return this.productType;
+	public double getWage() {
+		return this.Wage;
 	}
 
-	public void setProductType(String productType) {
-		this.productType = productType;
-	}
-
-	public double getProductWage() {
-		return this.productWage;
-	}
-
-	public void setProductWage(double productWage) {
-		this.productWage = productWage;
-	}
-
-	public double getProductMargin() {
-		return this.productMargin;
-	}
-
-	public void setProductMargin(double productMargin) {
-		this.productMargin = productMargin;
+	public void setWage(double wage) {
+		this.Wage = wage;
 	}
 }

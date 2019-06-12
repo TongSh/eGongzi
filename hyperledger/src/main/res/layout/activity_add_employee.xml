@@ -69,14 +69,6 @@
                 android:layout_height="60dp"
                 android:hint="姓名"/>
 
-            <EditText
-                android:id="@+id/add_employee_phone"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:hint="电话"/>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="800dp"/>

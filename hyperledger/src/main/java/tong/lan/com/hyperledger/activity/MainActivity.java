@@ -44,17 +44,17 @@ public class MainActivity extends AppCompatActivity implements
     private TabFragmentPagerAdapter mPagerAdapter;// 初始化View适配器
     private List<Fragment> mFragments;// 用来存放Tab01-04的Fragment
     // 底部四个用于点击的按钮，包含图片和文字，所以是layout
-    private LinearLayout mTab1;
-    private LinearLayout mTab2;
-    private LinearLayout mTab3;
-    private LinearLayout mTab4;
-    private LinearLayout mTabHome;
+    private LinearLayout tWage;
+    private LinearLayout tEmpl;
+    private LinearLayout tProd;
+    private LinearLayout tMana;
+    private LinearLayout tHome;
     // 底部四个图片，点击时更新图片
-    private ImageButton mImg1;
-    private ImageButton mImg2;
-    private ImageButton mImg3;
-    private ImageButton mImg4;
-    private ImageButton mImgHome;
+    private ImageButton mWage;
+    private ImageButton mEmpl;
+    private ImageButton mProd;
+    private ImageButton mMana;
+    private ImageButton mHome;
 
 
     @Override
@@ -82,9 +82,6 @@ public class MainActivity extends AppCompatActivity implements
 
     /* toolBar初始化 */
     private void initToolbar(){
-//        toolbar.setNavigationIcon(R.mipmap.ic_launcher);//设置导航栏图标
-//        toolbar.setLogo(R.mipmap.ic_launcher);//设置app logo
-//        toolbar.setSubtitle("Subtitle");//设置子标题
         toolbar.setTitle(R.string.cname);//设置主标题
         toolbar.inflateMenu(R.menu.toolbar_menu);//设置右上角的填充菜单
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
@@ -94,21 +91,17 @@ public class MainActivity extends AppCompatActivity implements
                 int menuItemId = item.getItemId();
                 if (menuItemId == R.id.action_search) {
                     Toast.makeText(MainActivity.this , "搜索" , Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(MainActivity.this, WageDetailActivity.class);
-                    startActivity(intent);
-//                    finish();
-                } else if (menuItemId == R.id.action_notification) {
+//                    Intent intent = new Intent(MainActivity.this, WageDetailActivity.class);
+//                    startActivity(intent);
+                } else if (menuItemId == R.id.add_record) {
                     Intent intent = new Intent(MainActivity.this, AddRecordActivity.class);
                     startActivity(intent);
-                    finish();
                 } else if (menuItemId == R.id.action_item1) {
                     Intent intent = new Intent(MainActivity.this, AddEmployeeActivity.class);
                     startActivity(intent);
-                    finish();
                 } else if (menuItemId == R.id.action_item2) {
                     Intent intent = new Intent(MainActivity.this, AddProductActivity.class);
                     startActivity(intent);
-                    finish();
                 }
                 return true;
             }
@@ -117,11 +110,11 @@ public class MainActivity extends AppCompatActivity implements
 
     /* 底部点击事件*/
     private void initEvent() {
-        mTab1.setOnClickListener(this);
-        mTab2.setOnClickListener(this);
-        mTab3.setOnClickListener(this);
-        mTab4.setOnClickListener(this);
-        mTabHome.setOnClickListener(this);
+        tWage.setOnClickListener(this);
+        tEmpl.setOnClickListener(this);
+        tProd.setOnClickListener(this);
+        tMana.setOnClickListener(this);
+        tHome.setOnClickListener(this);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             /**
              *ViewPage左右滑动时
@@ -133,23 +126,23 @@ public class MainActivity extends AppCompatActivity implements
                 switch (currentItem) {
                     case 1:
                         resetImg();
-                        mImg1.setImageResource(R.mipmap.icon_4_27);
+                        mWage.setImageResource(R.mipmap.icon_4_27);
                         break;
                     case 3:
                         resetImg();
-                        mImg2.setImageResource(R.mipmap.icon_4_15);
+                        mEmpl.setImageResource(R.mipmap.icon_4_15);
                         break;
                     case 0:
                         resetImg();
-                        mImgHome.setImageResource(R.mipmap.icon_4_9);
+                        mHome.setImageResource(R.mipmap.icon_4_9);
                         break;
                     case 2:
                         resetImg();
-                        mImg3.setImageResource(R.mipmap.icon_4_25);
+                        mProd.setImageResource(R.mipmap.icon_4_25);
                         break;
                     case 4:
                         resetImg();
-                        mImg4.setImageResource(R.mipmap.icon_4_17);
+                        mMana.setImageResource(R.mipmap.icon_4_17);
                         break;
                     default:
                         break;
@@ -173,17 +166,17 @@ public class MainActivity extends AppCompatActivity implements
         toolbar = findViewById(R.id.tool_bar_main);
         mViewPager = (ViewPager) findViewById(R.id.id_viewpage);
         // 初始化四个LinearLayout
-        mTab1 = (LinearLayout) findViewById(R.id.id_tab_1);
-        mTab2 = (LinearLayout) findViewById(R.id.id_tab_2);
-        mTab3 = (LinearLayout) findViewById(R.id.id_tab_3);
-        mTab4 = (LinearLayout) findViewById(R.id.id_tab_4);
-        mTabHome = findViewById(R.id.id_tab_home);
+        tWage = (LinearLayout) findViewById(R.id.id_tab_wage);
+        tEmpl = (LinearLayout) findViewById(R.id.id_tab_empl);
+        tProd = (LinearLayout) findViewById(R.id.id_tab_prod);
+        tMana = (LinearLayout) findViewById(R.id.id_tab_mana);
+        tHome = findViewById(R.id.id_tab_home);
         // 初始化四个按钮
-        mImg1 = (ImageButton) findViewById(R.id.id_tab_weixin_img);
-        mImg2 = (ImageButton) findViewById(R.id.id_tab_address_img);
-        mImg3 = (ImageButton) findViewById(R.id.id_tab_frd_img);
-        mImg4 = (ImageButton) findViewById(R.id.id_tab_settings_img);
-        mImgHome = findViewById(R.id.id_tab_home_img);
+        mWage = (ImageButton) findViewById(R.id.id_img_wage);
+        mEmpl = (ImageButton) findViewById(R.id.id_img_empl);
+        mProd = (ImageButton) findViewById(R.id.id_img_prod);
+        mMana = (ImageButton) findViewById(R.id.id_img_mana);
+        mHome = findViewById(R.id.id_img_home);
     }
 
     /**
@@ -194,10 +187,10 @@ public class MainActivity extends AppCompatActivity implements
         //把Fragment添加到List集合里面
         mFragments = new ArrayList<>();
         mFragments.add(new TabHomeFragment());
-        mFragments.add(new TabOneFragment());
-        mFragments.add(new TabThreeFragment());
-        mFragments.add(new TabTwoFragment());
-        mFragments.add(new TabFourFragment());
+        mFragments.add(new TabWageFragment());
+        mFragments.add(new TabProdFragment());
+        mFragments.add(new TabEmplFragment());
+        mFragments.add(new TabManaFragment());
 
         mPagerAdapter = new TabFragmentPagerAdapter(getSupportFragmentManager(), mFragments);
         mViewPager.setAdapter(mPagerAdapter);
@@ -212,30 +205,30 @@ public class MainActivity extends AppCompatActivity implements
     public void onClick(View arg0) {
 
         switch (arg0.getId()) {
-            case R.id.id_tab_1:
+            case R.id.id_tab_wage:
                 mViewPager.setCurrentItem(1);
                 resetImg();
-                mImg1.setImageResource(R.mipmap.icon_4_27);
+                mWage.setImageResource(R.mipmap.icon_4_27);
                 break;
-            case R.id.id_tab_2:
+            case R.id.id_tab_empl:
                 mViewPager.setCurrentItem(3);
                 resetImg();
-                mImg2.setImageResource(R.mipmap.icon_4_15);
+                mEmpl.setImageResource(R.mipmap.icon_4_15);
                 break;
-            case R.id.id_tab_3:
+            case R.id.id_tab_prod:
                 mViewPager.setCurrentItem(2);
                 resetImg();
-                mImg3.setImageResource(R.mipmap.icon_4_25);
+                mProd.setImageResource(R.mipmap.icon_4_25);
                 break;
-            case R.id.id_tab_4:
+            case R.id.id_tab_mana:
                 mViewPager.setCurrentItem(4);
                 resetImg();
-                mImg4.setImageResource(R.mipmap.icon_4_17);
+                mMana.setImageResource(R.mipmap.icon_4_17);
                 break;
             case R.id.id_tab_home:
                 mViewPager.setCurrentItem(0);
                 resetImg();
-                mImgHome.setImageResource(R.mipmap.icon_4_9);
+                mHome.setImageResource(R.mipmap.icon_4_9);
                 break;
             default:
                 break;
@@ -247,11 +240,11 @@ public class MainActivity extends AppCompatActivity implements
      * 1. 工资 2.员工 3.产品 4.管理
      */
     private void resetImg() {
-        mImg1.setImageResource(R.mipmap.icon_4_28);
-        mImg2.setImageResource(R.mipmap.icon_4_16);
-        mImg3.setImageResource(R.mipmap.icon_4_26);
-        mImg4.setImageResource(R.mipmap.icon_4_18);
-        mImgHome.setImageResource(R.mipmap.icon_4_10);
+        mWage.setImageResource(R.mipmap.icon_4_28);
+        mEmpl.setImageResource(R.mipmap.icon_4_16);
+        mProd.setImageResource(R.mipmap.icon_4_26);
+        mMana.setImageResource(R.mipmap.icon_4_18);
+        mHome.setImageResource(R.mipmap.icon_4_10);
     }
 
     @Override

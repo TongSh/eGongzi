@@ -13,7 +13,7 @@
         android:gravity="center"
         android:orientation="vertical" >
         <ImageButton
-            android:id="@+id/id_tab_home_img"
+            android:id="@+id/id_img_home"
             android:scaleType="centerInside"
             android:layout_width="30dp"
             android:layout_height="30dp"
@@ -30,7 +30,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/id_tab_1"
+        android:id="@+id/id_tab_wage"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -38,7 +38,7 @@
         android:orientation="vertical" >
         <!-- android:clickable="false" 是为了防止ImageButton截取了触摸事件 ，这里事件要给它的上一级linearlayout-->
         <ImageButton
-            android:id="@+id/id_tab_weixin_img"
+            android:id="@+id/id_img_wage"
             android:scaleType="centerInside"
             android:layout_width="30dp"
             android:layout_height="30dp"
@@ -56,7 +56,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/id_tab_3"
+        android:id="@+id/id_tab_prod"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -64,7 +64,7 @@
         android:orientation="vertical" >
 
         <ImageButton
-            android:id="@+id/id_tab_frd_img"
+            android:id="@+id/id_img_prod"
             android:scaleType="centerInside"
             android:layout_width="30dp"
             android:layout_height="30dp"
@@ -84,7 +84,7 @@
 
 
     <LinearLayout
-        android:id="@+id/id_tab_2"
+        android:id="@+id/id_tab_empl"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -92,7 +92,7 @@
         android:orientation="vertical" >
 
         <ImageButton
-            android:id="@+id/id_tab_address_img"
+            android:id="@+id/id_img_empl"
             android:scaleType="centerInside"
             android:layout_width="30dp"
             android:layout_height="30dp"
@@ -112,7 +112,7 @@
 
 
     <LinearLayout
-        android:id="@+id/id_tab_4"
+        android:id="@+id/id_tab_mana"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -120,7 +120,7 @@
         android:orientation="vertical" >
 
         <ImageButton
-            android:id="@+id/id_tab_settings_img"
+            android:id="@+id/id_img_mana"
             android:scaleType="centerInside"
             android:layout_width="30dp"
             android:layout_height="30dp"

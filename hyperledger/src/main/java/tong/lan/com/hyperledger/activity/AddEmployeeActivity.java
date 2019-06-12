@@ -20,8 +20,7 @@ public class AddEmployeeActivity extends AppCompatActivity {
 
     @ViewInject(R.id.add_employee_name)
     private EditText employeeName;
-    @ViewInject(R.id.add_employee_phone)
-    private EditText EmployeePhone;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,18 +32,16 @@ public class AddEmployeeActivity extends AppCompatActivity {
     private void submit(View v)
     {
         String employee_name = employeeName.getText().toString();
-        String employee_phone = EmployeePhone.getText().toString();
         if (!employee_name.isEmpty()) {
             Employee mEmployee = new Employee();
             mEmployee.setEmployeeName(employee_name);
-            mEmployee.setEmployeePhone(employee_phone);
             if (mEmployee.save()) {
                 Toast.makeText(this, "存储成功", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "存储失败", Toast.LENGTH_SHORT).show();
             }
-            Intent intent = new Intent(AddEmployeeActivity.this, MainActivity.class);
-            startActivity(intent);
+//            Intent intent = new Intent(AddEmployeeActivity.this, MainActivity.class);
+//            startActivity(intent);
             finish();
         }
         else {
@@ -56,8 +53,8 @@ public class AddEmployeeActivity extends AppCompatActivity {
     @Event(value = {R.id.add_employee_cancel},type = View.OnClickListener.class)
     private void addEmployeeBack(View v)
     {
-        Intent intent = new Intent(AddEmployeeActivity.this, MainActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(AddEmployeeActivity.this, MainActivity.class);
+//        startActivity(intent);
         finish();
     }
 }

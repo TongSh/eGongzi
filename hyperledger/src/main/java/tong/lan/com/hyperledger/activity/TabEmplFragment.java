@@ -18,15 +18,15 @@ import java.util.List;
 import tong.lan.com.hyperledger.R;
 import tong.lan.com.hyperledger.adapter.EmployeeAdapter;
 import tong.lan.com.hyperledger.adapter.WageAdapter;
-import tong.lan.com.hyperledger.bean.EmployeeBean;
+import tong.lan.com.hyperledger.bean.EmployeeListBean;
 import tong.lan.com.hyperledger.domain.Employee;
 import tong.lan.com.hyperledger.utils.LetterView;
 
-public class TabTwoFragment extends Fragment{
+public class TabEmplFragment extends Fragment{
 
     private RecyclerView mRecyclerView;
     private LetterView letterView;
-    private List<EmployeeBean> mDatas;
+    private List<EmployeeListBean> mDatas;
     private EmployeeAdapter mAdapter;
 
 
@@ -34,11 +34,42 @@ public class TabTwoFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,  Bundle savedInstanceState) {
         // 通过View方法把布局加载到fragmnet中
-        View view = inflater.inflate(R.layout.tab_02,null);
-        initData();
+        View view = inflater.inflate(R.layout.tab_empl,null);
         // 使用加载的布局中的findViewById的方法找到控件
         mRecyclerView = view.findViewById(R.id.employee_recycler);
         letterView = view.findViewById(R.id.letter_view);
+        // 设置内容
+        readDb();
+        setAdapter();
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // 更新内容
+        readDb();
+        setAdapter();
+    }
+
+    /**
+     * 从数据库读员工信息
+     */
+    protected void readDb()
+    {
+        mDatas = new ArrayList<EmployeeListBean>();
+        List<Employee> employees = DataSupport.findAll(Employee.class);
+        for (Employee employee : employees){
+            mDatas.add(new EmployeeListBean(employee.getId(),employee.getEmployeeName(),0));
+        }
+    }
+
+    /**
+     * 设置员工列表监听、右侧字母导航栏监听
+     */
+    private void setAdapter()
+    {
+
         // 设置布局管理器
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(layoutManager);
@@ -54,13 +85,12 @@ public class TabTwoFragment extends Fragment{
                 Employee employee = DataSupport.find(Employee.class,eID);
                 intent.putExtra("eID", eID);
                 intent.putExtra("eName",employee.getEmployeeName());
-                intent.putExtra("ePhone",employee.getEmployeePhone());
                 startActivity(intent);
             }
 
             @Override
             public void mLongClick(View v, int pos) {
-                Toast.makeText(getActivity(),"onLongClick---"+pos,Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(),"长按---"+pos,Toast.LENGTH_LONG).show();
             }
         });
         mRecyclerView.setAdapter(mAdapter);
@@ -71,16 +101,6 @@ public class TabTwoFragment extends Fragment{
                 layoutManager.scrollToPositionWithOffset(mAdapter.getScrollPosition(character), 0);
             }
         });
-        return view;
-    }
-
-    protected void initData()
-    {
-        mDatas = new ArrayList<EmployeeBean>();
-        List<Employee> employees = DataSupport.findAll(Employee.class);
-        for (Employee employee : employees){
-            mDatas.add(new EmployeeBean(employee.getId(),employee.getEmployeeName(),employee.getEmployeePhone(),0));
-        }
     }
 }
 

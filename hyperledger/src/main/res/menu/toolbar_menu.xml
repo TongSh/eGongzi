@@ -8,7 +8,7 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/action_notification"
+        android:id="@+id/add_record"
         android:icon="@mipmap/icon_plus"
         android:title="新增记录"
         app:showAsAction="ifRoom" />

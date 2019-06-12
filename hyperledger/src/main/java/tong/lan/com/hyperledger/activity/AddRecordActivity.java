@@ -62,7 +62,7 @@ public class AddRecordActivity extends AppCompatActivity implements DatePickerDi
 
         productNames = new ArrayList<>();
         for(Product product : DataSupport.findAll(Product.class)){
-            productNames.add(product.getId()+" "+product.getProductType()+" "+product.getProductName());
+            productNames.add(product.getId()+" "+product.getName());
         }
         mProduct.attachDataSource(productNames);
         mProduct.setTextColor(Color.BLACK);

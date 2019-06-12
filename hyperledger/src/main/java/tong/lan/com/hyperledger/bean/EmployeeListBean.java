@@ -2,23 +2,20 @@ package tong.lan.com.hyperledger.bean;
 
 import java.io.Serializable;
 
-public class EmployeeBean implements Serializable{
+public class EmployeeListBean implements Serializable{
     private Integer id;
     private String employeeName;//姓名
-    private String employeePhone;
     private int mType;          // 正常显示的员工，还是字母分隔符
 
-    public EmployeeBean(Integer id, String employeeName, String employeePhone, int type) {
+    public EmployeeListBean(Integer id, String employeeName, int type) {
         this.id = id;
         this.employeeName = employeeName;
-        this.employeePhone = employeePhone;
         mType = type;
     }
 
-    public EmployeeBean(String ch, int type){
+    public EmployeeListBean(String ch, int type){
         id = 0;
         employeeName = ch;
-        employeePhone = "";
         mType = type;
     }
 
@@ -38,16 +35,7 @@ public class EmployeeBean implements Serializable{
         return employeeName;
     }
 
-    public String getEmployeePhone() {
-        return employeePhone;
-    }
-
     public void setEmployeeName(String employeeName) {
         this.employeeName = employeeName;
     }
-
-    public void setEmployeePhone(String employeePhone) {
-        this.employeePhone = employeePhone;
-    }
-
 }

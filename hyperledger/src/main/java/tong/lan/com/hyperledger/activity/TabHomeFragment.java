@@ -65,14 +65,13 @@ public class TabHomeFragment extends Fragment{
         List<RecordBean> recordBeans = new ArrayList<>();
         for(int i = 0; i < 3 && i < makes.size(); ++i){
             Make make = makes.get(i);
-            String productInfo = make.getProduct().getProductType()
-                    +" "+make.getProduct().getProductName()
+            String productInfo = make.getProduct().getName()
                     +"  *  "+make.getMakeAmount();//产品及数量信息
             String employeeName = make.getEmployee().getEmployeeName();//生产人
             Calendar cal = Calendar.getInstance();
             cal.setTime(make.getMakeDate());
             String recordDate = (cal.get(Calendar.MONTH)+1)+"-"+cal.get(Calendar.DAY_OF_MONTH);//生产日期
-            double wage = make.getMakeAmount() * make.getProduct().getProductWage();//工资
+            double wage = make.getMakeAmount() * make.getProduct().getWage();//工资
 
             recordBeans.add(new RecordBean(productInfo,employeeName,recordDate,wage));
         }
@@ -105,10 +104,9 @@ public class TabHomeFragment extends Fragment{
 
         for(int key : map.keySet()){
             Product product = DataSupport.find(Product.class,key);
-            String productInfo = product.getProductType()+" "+product.getProductName();//产品信息
+            String productInfo = product.getName();//产品信息
             int amount = map.get(key);
-            double margin = product.getProductMargin()*amount;
-            dayProductBeans.add(new DayProductBean(productInfo,amount,margin));
+            dayProductBeans.add(new DayProductBean(productInfo,amount,0));
         }
         // 设置布局管理器
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
