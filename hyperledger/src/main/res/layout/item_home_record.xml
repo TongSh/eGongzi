@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="70dp"
     android:gravity="center_vertical"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:id="@+id/recd_layout">
 
     <TextView
         android:id="@+id/item_home_record_employee_first_name"

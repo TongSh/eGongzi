@@ -13,7 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/ColorTranslucentTheme">
-        <activity android:name=".activity.AddRecordBatchActivity"/>
+        <activity android:name=".activity.WageRankActivity"></activity>
+        <activity android:name=".activity.RecordListActivity" />
+        <activity android:name=".activity.AddRecordBatchActivity" />
         <activity
             android:name=".activity.BatchDialogActivity"
             android:theme="@style/Theme.AppCompat.Dialog" />

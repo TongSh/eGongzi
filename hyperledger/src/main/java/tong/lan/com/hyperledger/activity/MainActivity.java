@@ -1,7 +1,9 @@
 package tong.lan.com.hyperledger.activity;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
@@ -28,6 +30,7 @@ import java.util.List;
 
 import tong.lan.com.hyperledger.R;
 import tong.lan.com.hyperledger.adapter.TabFragmentPagerAdapter;
+import tong.lan.com.hyperledger.utils.DbBackups;
 
 public class MainActivity extends AppCompatActivity implements
         android.view.View.OnClickListener{
@@ -56,11 +59,14 @@ public class MainActivity extends AppCompatActivity implements
     private ImageButton mMana;
     private ImageButton mHome;
 
+    private Context context;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        context = this;
 
         initView();
         initToolbar();
@@ -70,6 +76,29 @@ public class MainActivity extends AppCompatActivity implements
         //建数据库
         SQLiteDatabase db = Connector.getDatabase();
         Stetho.initializeWithDefaults(this);
+        loadDb();
+    }
+
+    private void loadDb(){
+        SharedPreferences sharedPreferences = getSharedPreferences("FirstRun",0);
+        Boolean first_run = sharedPreferences.getBoolean("First",true);
+        if (first_run){
+            sharedPreferences.edit().putBoolean("First",false).commit();
+            ThreadRecover threadRecover = new ThreadRecover();
+            threadRecover.run();
+//            Toast.makeText(this,"第一次",Toast.LENGTH_LONG).show();
+        }
+        else {
+//            Toast.makeText(this,"不是第一次",Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private class ThreadRecover extends Thread{
+        public void run(){
+            //编写自己的线程代码
+            DbBackups backups = new DbBackups(context);
+            backups.doInBackground(DbBackups.COMMAND_RESTORE);
+        }
     }
 
     private void getPower(){

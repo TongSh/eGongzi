@@ -25,6 +25,7 @@
     <include layout="@layout/part_tab_mana_top"/>
     <include layout="@layout/part_home_page_line"/>
     <LinearLayout
+        android:id="@+id/mana_all_recs"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:gravity="center_vertical"
@@ -39,12 +40,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="生产记录"
-            android:textSize="18sp"
+            android:text="全部记录"
+            android:textSize="20sp"
             android:layout_marginLeft="20dp"
             android:textColor="#000"/>
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/mana_wage_table"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center_vertical"
@@ -58,13 +60,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="员工工资"
-            android:textSize="18sp"
+            android:text="工资榜"
+            android:textSize="20sp"
             android:layout_marginLeft="20dp"
             android:textColor="#000"/>
     </LinearLayout>
     <LinearLayout
-        android:id="@+id/db_back_up"
+        android:id="@+id/mana_data_backup"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center_vertical"
@@ -79,12 +81,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="数据备份"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:layout_marginLeft="20dp"
             android:textColor="#000"/>
     </LinearLayout>
     <LinearLayout
-        android:id="@+id/add_product_type"
+        android:id="@+id/mana_data_recover"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center_vertical"
@@ -98,8 +100,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="新增类别"
-            android:textSize="18sp"
+            android:text="数据恢复"
+            android:textSize="20sp"
             android:layout_marginLeft="20dp"
             android:textColor="#000"/>
     </LinearLayout>

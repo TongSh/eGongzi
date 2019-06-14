@@ -9,12 +9,21 @@ public class RecdListBean {
     private String employeeName;//生产人
     private String recordDate;//生产日期
     private double wage;//工资
+    private int recID;
 
     public RecdListBean(String productInfo, String employeeName, String recordDate, double wage) {
         this.productInfo = productInfo;
         this.employeeName = employeeName;
         this.recordDate = recordDate;
         this.wage = wage;
+    }
+
+    public RecdListBean(String productInfo, String employeeName, String recordDate, double wage, int recID) {
+        this.productInfo = productInfo;
+        this.employeeName = employeeName;
+        this.recordDate = recordDate;
+        this.wage = wage;
+        this.recID = recID;
     }
 
     public RecdListBean() {
@@ -50,5 +59,13 @@ public class RecdListBean {
 
     public void setWage(double wage) {
         this.wage = wage;
+    }
+
+    public int getRecID() {
+        return recID;
+    }
+
+    public void setRecID(int recID) {
+        this.recID = recID;
     }
 }

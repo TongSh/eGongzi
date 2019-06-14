@@ -25,6 +25,9 @@ import java.util.List;
 import tong.lan.com.hyperledger.bean.WageMonListBean;
 import tong.lan.com.hyperledger.bean.WageEmplListBean;
 
+import static java.lang.String.*;
+import static java.lang.String.format;
+
 public class SaveImg {
 
     /**
@@ -171,7 +174,7 @@ public class SaveImg {
 
             //创建TextView2,设置属性，并设置宽度为三分之一
             TextView tv2 = new TextView(activity);
-            tv2.setText((int) item.getWage()+"");
+            tv2.setText(format("%.1f", item.getWage()));
             tv2.setTextColor(Color.parseColor("#000000"));
             tv2.setTextSize(30);
             tv2.setPadding(px, px, px, px);
@@ -216,7 +219,8 @@ public class SaveImg {
             //大图增加一个条目的高度
             allItemsHeight += childView.getMeasuredHeight();
         }
-        //创建大图
+        allItemsHeight += 300;
+                //创建大图
         Bitmap bigBitmap = Bitmap.createBitmap(itemWidth, allItemsHeight, Bitmap.Config.ARGB_4444);
         //创建画布
         Canvas bigCanvas = new Canvas(bigBitmap);
@@ -303,7 +307,7 @@ public class SaveImg {
             TextView tv1 = new TextView(activity);
             tv1.setText("日期");
             tv1.setTextColor(Color.parseColor("#000000"));
-            tv1.setTextSize(20);
+            tv1.setTextSize(18);
             tv1.setPadding(px, px, px, px);
             tv1.setGravity(Gravity.CENTER);
             ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(itemWidth / 6, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -313,7 +317,7 @@ public class SaveImg {
             TextView tv2 = new TextView(activity);
             tv2.setText("产品");
             tv2.setTextColor(Color.parseColor("#000000"));
-            tv2.setTextSize(20);
+            tv2.setTextSize(18);
             tv2.setPadding(px, px, px, px);
             tv2.setGravity(Gravity.CENTER);
             ViewGroup.LayoutParams params2 = new ViewGroup.LayoutParams(itemWidth / 2, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -323,19 +327,19 @@ public class SaveImg {
             TextView tv3 = new TextView(activity);
             tv3.setText("数量");
             tv3.setTextColor(Color.parseColor("#000000"));
-            tv3.setTextSize(20);
+            tv3.setTextSize(18);
             tv3.setPadding(px, px, px, px);
             tv3.setGravity(Gravity.CENTER);
-            ViewGroup.LayoutParams params3 = new ViewGroup.LayoutParams(itemWidth / 6, ViewGroup.LayoutParams.WRAP_CONTENT);
+            ViewGroup.LayoutParams params3 = new ViewGroup.LayoutParams(itemWidth*3/24, ViewGroup.LayoutParams.WRAP_CONTENT);
             tv3.setLayoutParams(params3);
 
             TextView tv4 = new TextView(activity);
             tv4.setText("工资");
             tv4.setTextColor(Color.parseColor("#000000"));
-            tv4.setTextSize(20);
+            tv4.setTextSize(18);
             tv4.setPadding(px, px, px, px);
             tv4.setGravity(Gravity.CENTER);
-            ViewGroup.LayoutParams params4 = new ViewGroup.LayoutParams(itemWidth / 6, ViewGroup.LayoutParams.WRAP_CONTENT);
+            ViewGroup.LayoutParams params4 = new ViewGroup.LayoutParams(itemWidth*5/24, ViewGroup.LayoutParams.WRAP_CONTENT);
             tv4.setLayoutParams(params4);
 
             //创建条目分割线，设置颜色及高度
@@ -382,7 +386,7 @@ public class SaveImg {
             TextView tv1 = new TextView(activity);
             tv1.setText(item.getDate());
             tv1.setTextColor(Color.parseColor("#000000"));
-            tv1.setTextSize(20);
+            tv1.setTextSize(18);
             tv1.setPadding(px, px, px, px);
             tv1.setGravity(Gravity.CENTER);
             ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(itemWidth / 6, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -392,7 +396,7 @@ public class SaveImg {
             TextView tv2 = new TextView(activity);
             tv2.setText(item.getProduct());
             tv2.setTextColor(Color.parseColor("#000000"));
-            tv2.setTextSize(20);
+            tv2.setTextSize(18);
             tv2.setPadding(px, px, px, px);
             tv2.setGravity(Gravity.CENTER);
             ViewGroup.LayoutParams params2 = new ViewGroup.LayoutParams(itemWidth / 2, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -402,19 +406,19 @@ public class SaveImg {
             TextView tv3 = new TextView(activity);
             tv3.setText(item.getAmount()+"");
             tv3.setTextColor(Color.parseColor("#000000"));
-            tv3.setTextSize(20);
+            tv3.setTextSize(18);
             tv3.setPadding(px, px, px, px);
             tv3.setGravity(Gravity.CENTER);
-            ViewGroup.LayoutParams params3 = new ViewGroup.LayoutParams(itemWidth / 6, ViewGroup.LayoutParams.WRAP_CONTENT);
+            ViewGroup.LayoutParams params3 = new ViewGroup.LayoutParams(itemWidth*3/24, ViewGroup.LayoutParams.WRAP_CONTENT);
             tv3.setLayoutParams(params3);
 
             TextView tv4 = new TextView(activity);
-            tv4.setText((int)item.getWage()+"");
+            tv4.setText(format("%.1f", item.getWage()));
             tv4.setTextColor(Color.parseColor("#000000"));
-            tv4.setTextSize(20);
+            tv4.setTextSize(18);
             tv4.setPadding(px, px, px, px);
             tv4.setGravity(Gravity.CENTER);
-            ViewGroup.LayoutParams params4 = new ViewGroup.LayoutParams(itemWidth / 6, ViewGroup.LayoutParams.WRAP_CONTENT);
+            ViewGroup.LayoutParams params4 = new ViewGroup.LayoutParams(itemWidth*5/24, ViewGroup.LayoutParams.WRAP_CONTENT);
             tv4.setLayoutParams(params4);
 
             //创建条目分割线，设置颜色及高度
@@ -462,9 +466,9 @@ public class SaveImg {
             tv1.setLayoutParams(param1);
 
             TextView tv2 = new TextView(activity);
-            tv2.setText(total+" 元");
+            tv2.setText(total+" 元 ");
             tv2.setTextColor(Color.parseColor("#000000"));
-            tv2.setTextSize(25);
+            tv2.setTextSize(23);
             tv2.setGravity(Gravity.RIGHT);
             ViewGroup.LayoutParams param2 = new ViewGroup.LayoutParams(itemWidth/2, ViewGroup.LayoutParams.WRAP_CONTENT);
             tv2.setLayoutParams(param2);
@@ -495,7 +499,7 @@ public class SaveImg {
             //大图增加一个条目的高度
             allItemsHeight += childView.getMeasuredHeight();
         }
-        allItemsHeight += 30;
+        allItemsHeight += 300;
         //创建大图
         Bitmap bigBitmap = Bitmap.createBitmap(itemWidth, allItemsHeight, Bitmap.Config.ARGB_4444);
         //创建画布

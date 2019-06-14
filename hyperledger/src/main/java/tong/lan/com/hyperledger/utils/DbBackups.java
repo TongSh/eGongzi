@@ -4,12 +4,15 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
+
+import tong.lan.com.hyperledger.R;
 
 /**
  *
@@ -55,24 +58,47 @@ public class DbBackups extends AsyncTask<String, Void, Integer> {
                 try {
                     backup.createNewFile();
                 }catch (IOException e) {
+                    Toast.makeText(myContext,"文件创建失败!",Toast.LENGTH_LONG).show();
                     e.printStackTrace();
                 }
                 fileCopy(dbFile, backup);
+                Toast.makeText(myContext,"数据备份成功!",Toast.LENGTH_LONG).show();
                 return BACKUP_SUCCESS;
             } catch (Exception e) {
-                Log.e("DbBackups", "数据库备份异常" + e.getMessage());
+                Toast.makeText(myContext,"数据备份异常!",Toast.LENGTH_LONG).show();
                 return BACKUP_ERROR;
             }
         } else if (command.equals(COMMAND_RESTORE)) {
             try {
                 fileCopy(backup, dbFile);
+                Toast.makeText(myContext,"数据恢复成功!",Toast.LENGTH_LONG).show();
                 return RESTORE_SUCCESS;
             } catch (Exception e) {
-                Log.e("DbBackups", "数据库还原异常" + e.getMessage());
+                Toast.makeText(myContext,"数据恢复异常!",Toast.LENGTH_LONG).show();
                 return RESTORE_NOFLEERROR;
             }
         } else {
             return null;
+        }
+    }
+
+    private void initLoad(){
+        File dbFile = myContext.getDatabasePath("WorkManager.db").getAbsoluteFile();
+
+        // 需要备份的数据库路径
+        String PACKAGE_NAME = "tong.lan.com.hyperledger";
+        String DB_PATH = "/data"
+                + Environment.getDataDirectory().getAbsolutePath() + "/"
+                + PACKAGE_NAME + "/" ; // 在手机里存放数据库的位置
+
+        File backup = new File(DB_PATH, "Backup.db");
+        try {
+            fileCopy(backup, dbFile);
+            Toast.makeText(myContext,"数据恢复成功!",Toast.LENGTH_LONG).show();
+            return;
+        } catch (Exception e) {
+            Toast.makeText(myContext,"数据恢复异常!",Toast.LENGTH_LONG).show();
+            return;
         }
     }
 
@@ -82,7 +108,7 @@ public class DbBackups extends AsyncTask<String, Void, Integer> {
         try {
             inChannel.transferTo(0, inChannel.size(), outChannel);
         } catch (IOException e) {
-            Log.e("DbBackups", "数据库文件操作异常" + e.getMessage());
+            Toast.makeText(myContext,"文件复制异常!",Toast.LENGTH_LONG).show();
         } finally {
             if (inChannel != null) {
                 inChannel.close();
@@ -98,16 +124,16 @@ public class DbBackups extends AsyncTask<String, Void, Integer> {
         super.onPostExecute(result);
         switch (result) {
             case BACKUP_SUCCESS:
-                Log.d("数据库备份", "成功");
+                Toast.makeText(myContext,"数据备份成功!",Toast.LENGTH_LONG).show();
                 break;
             case BACKUP_ERROR:
-                Log.d("数据库备份", "失败");
+                Toast.makeText(myContext,"数据备份失败!",Toast.LENGTH_LONG).show();
                 break;
             case RESTORE_SUCCESS:
-                Log.d("数据库还原", "成功");
+                Toast.makeText(myContext,"数据恢复成功!",Toast.LENGTH_LONG).show();
                 break;
             case RESTORE_NOFLEERROR:
-                Log.d("数据库还原", "失败");
+                Toast.makeText(myContext,"数据恢复失败!",Toast.LENGTH_LONG).show();
                 break;
             default:
                 break;

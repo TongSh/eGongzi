@@ -18,6 +18,8 @@ import java.util.List;
 import tong.lan.com.hyperledger.R;
 import tong.lan.com.hyperledger.bean.WageMonListBean;
 
+import static java.lang.String.*;
+
 public class WageMonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private LayoutInflater mLayoutInflater;
@@ -59,7 +61,7 @@ public class WageMonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         ((ProductHolder) holder).employeeFirstName.setText(mRecords.get(position).getEmployeeName().charAt(0)+"");
         ((ProductHolder) holder).employeeName.setText(mRecords.get(position).getEmployeeName());
-        ((ProductHolder) holder).recorddWage.setText((int) mRecords.get(position).getWage()+"");
+        ((ProductHolder) holder).recorddWage.setText(format("%.1f", mRecords.get(position).getWage()));
         ((ProductHolder) holder).recordWorkDay.setText("出勤"+mRecords.get(position).getWorkDay()+"天");
 
         if (listener!=null) {

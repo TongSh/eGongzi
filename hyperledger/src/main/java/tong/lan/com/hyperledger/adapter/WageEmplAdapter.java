@@ -14,6 +14,8 @@ import java.util.List;
 import tong.lan.com.hyperledger.R;
 import tong.lan.com.hyperledger.bean.WageEmplListBean;
 
+import static java.lang.String.*;
+
 public class WageEmplAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private LayoutInflater mLayoutInflater;
@@ -39,9 +41,9 @@ public class WageEmplAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         ((ProductHolder) holder).productName.setText(mRecords.get(position).getProduct());
-        ((ProductHolder) holder).recordAmount.setText("数量 "+mRecords.get(position).getAmount());
+        ((ProductHolder) holder).recordAmount.setText("数量 "+ mRecords.get(position).getAmount());
         ((ProductHolder) holder).recordDate.setText(mRecords.get(position).getDate());
-        ((ProductHolder) holder).recordWage.setText((int) mRecords.get(position).getWage()+"");
+        ((ProductHolder) holder).recordWage.setText(format("%.1f", mRecords.get(position).getWage()));
     }
 
     @Override

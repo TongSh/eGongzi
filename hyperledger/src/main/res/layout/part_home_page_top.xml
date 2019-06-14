@@ -23,10 +23,10 @@
                 android:orientation="vertical" >
 
                 <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_gravity="center_horizontal"
-                    android:src="@mipmap/h_1" />
+                    android:src="@mipmap/g1" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -35,7 +35,7 @@
                     android:layout_marginTop="5dp"
                     android:text="记一笔"
                     android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:textSize="18sp" />
             </LinearLayout>
         </RelativeLayout>
 
@@ -52,10 +52,10 @@
                 android:orientation="vertical" >
 
                 <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_gravity="center_horizontal"
-                    android:src="@mipmap/h_2" />
+                    android:src="@mipmap/g2" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -64,7 +64,7 @@
                     android:layout_marginTop="5dp"
                     android:text="批量记"
                     android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:textSize="18sp" />
             </LinearLayout>
         </RelativeLayout>
 
@@ -81,10 +81,10 @@
                 android:orientation="vertical" >
 
                 <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_gravity="center_horizontal"
-                    android:src="@mipmap/h_3" />
+                    android:src="@mipmap/g3" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -93,7 +93,7 @@
                     android:layout_marginTop="5dp"
                     android:text="加员工"
                     android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:textSize="18sp" />
             </LinearLayout>
         </RelativeLayout>
 
@@ -110,10 +110,10 @@
                 android:orientation="vertical" >
 
                 <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_gravity="center_horizontal"
-                    android:src="@mipmap/h_4" />
+                    android:src="@mipmap/g4" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -122,7 +122,7 @@
                     android:layout_marginTop="5dp"
                     android:text="加产品"
                     android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:textSize="18sp" />
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
