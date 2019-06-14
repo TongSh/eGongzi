@@ -12,7 +12,7 @@ import java.util.List;
 public class Employee extends DataSupport {
 	private Integer id;
 	private String employeeName;
-	private List<Make> make = new ArrayList<>();//一个员工对应多条生产记录
+	private List<Record> record = new ArrayList<>();//一个员工对应多条生产记录
 
 
 	public Integer getId() {
@@ -23,12 +23,12 @@ public class Employee extends DataSupport {
 		this.id = id;
 	}
 
-	public List<Make> getMake() {
-		return make;
+	public List<Record> getRecord() {
+		return record;
 	}
 
-	public void setMake(List<Make> make) {
-		this.make = make;
+	public void setRecord(List<Record> record) {
+		this.record = record;
 	}
 
 	public String getEmployeeName() {

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 
@@ -40,5 +41,14 @@ public class DateUtil {
         String y = df.format(year);
         df = new DecimalFormat("00");
         return y+"-"+df.format(month)+"-"+df.format(day);
+    }
+
+    static public int getDaysByYearMonth(int year, int month){
+        Calendar a = Calendar.getInstance();
+        a.set(Calendar.YEAR,year);
+        a.set(Calendar.MONTH,month-1);
+        a.set(Calendar.DATE,1);
+        a.roll(Calendar.DATE,-1);
+        return a.get(Calendar.DATE);
     }
 }

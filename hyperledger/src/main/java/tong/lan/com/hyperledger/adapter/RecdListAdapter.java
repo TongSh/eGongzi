@@ -1,37 +1,28 @@
 package tong.lan.com.hyperledger.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.github.lzyzsd.randomcolor.RandomColor;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import tong.lan.com.hyperledger.R;
-import tong.lan.com.hyperledger.bean.ProductBean;
-import tong.lan.com.hyperledger.bean.RecordBean;
-import tong.lan.com.hyperledger.utils.Utils;
+import tong.lan.com.hyperledger.bean.RecdListBean;
 
-public class RecordAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class RecdListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private LayoutInflater mLayoutInflater;
     private Context mContext;
-    private List<RecordBean> mRecords;
+    private List<RecdListBean> mRecords;
 
-    public RecordAdapter(Context context, List<RecordBean> records) {
+    public RecdListAdapter(Context context, List<RecdListBean> records) {
         mContext = context;
         mLayoutInflater = LayoutInflater.from(context);
         mRecords = records;

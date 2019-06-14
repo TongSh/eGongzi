@@ -93,16 +93,18 @@ public class MainActivity extends AppCompatActivity implements
                     Toast.makeText(MainActivity.this , "搜索" , Toast.LENGTH_SHORT).show();
 //                    Intent intent = new Intent(MainActivity.this, WageDetailActivity.class);
 //                    startActivity(intent);
-                } else if (menuItemId == R.id.add_record) {
-                    Intent intent = new Intent(MainActivity.this, AddRecordActivity.class);
-                    startActivity(intent);
-                } else if (menuItemId == R.id.action_item1) {
-                    Intent intent = new Intent(MainActivity.this, AddEmployeeActivity.class);
-                    startActivity(intent);
-                } else if (menuItemId == R.id.action_item2) {
-                    Intent intent = new Intent(MainActivity.this, AddProductActivity.class);
-                    startActivity(intent);
                 }
+//                else if (menuItemId == R.id.add_record) {
+//                    Toast.makeText(MainActivity.this , "新增" , Toast.LENGTH_SHORT).show();
+//                    Intent intent = new Intent(MainActivity.this, AddRecordActivity.class);
+//                    startActivity(intent);
+//                } else if (menuItemId == R.id.action_item1) {
+//                    Intent intent = new Intent(MainActivity.this, AddEmployeeActivity.class);
+//                    startActivity(intent);
+//                } else if (menuItemId == R.id.action_item2) {
+//                    Intent intent = new Intent(MainActivity.this, AddProductActivity.class);
+//                    startActivity(intent);
+//                }
                 return true;
             }
         });

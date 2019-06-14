@@ -7,24 +7,24 @@
         android:title="搜索"
         app:showAsAction="ifRoom" />
 
-    <item
-        android:id="@+id/add_record"
-        android:icon="@mipmap/icon_plus"
-        android:title="新增记录"
-        app:showAsAction="ifRoom" />
+    <!--<item-->
+        <!--android:id="@+id/add_record"-->
+        <!--android:icon="@mipmap/icon_plus"-->
+        <!--android:title="新增记录"-->
+        <!--app:showAsAction="ifRoom" />-->
 
-    <item
-        android:id="@+id/action_item1"
-        android:title="添加员工"
-        app:showAsAction="never" />
+    <!--<item-->
+        <!--android:id="@+id/action_item1"-->
+        <!--android:title="添加员工"-->
+        <!--app:showAsAction="never" />-->
 
-    <item
-        android:id="@+id/action_item2"
-        android:title="添加产品"
-        app:showAsAction="never" />
+    <!--<item-->
+        <!--android:id="@+id/action_item2"-->
+        <!--android:title="添加产品"-->
+        <!--app:showAsAction="never" />-->
 
-    <item
-        android:id="@+id/action_item3"
-        android:title="新增记录"
-        app:showAsAction="never" />
+    <!--<item-->
+        <!--android:id="@+id/action_item3"-->
+        <!--android:title="新增记录"-->
+        <!--app:showAsAction="never" />-->
 </menu>

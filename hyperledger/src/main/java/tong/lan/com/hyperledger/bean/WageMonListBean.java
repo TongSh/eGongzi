@@ -1,20 +1,20 @@
 package tong.lan.com.hyperledger.bean;
 
 
-public class WageBean {
+public class WageMonListBean {
     private int employeeID;
     private String employeeName;//生产人
     private double wage;//工资
     private int workDay;//出勤
 
-    public WageBean(int employeeID, String employeeName, double wage, int workDay) {
+    public WageMonListBean(int employeeID, String employeeName, double wage, int workDay) {
         this.employeeID = employeeID;
         this.employeeName = employeeName;
         this.wage = wage;
         this.workDay = workDay;
     }
 
-    public WageBean() {
+    public WageMonListBean() {
     }
 
     public int getEmployeeID() {

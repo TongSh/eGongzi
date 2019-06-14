@@ -18,26 +18,26 @@ import java.util.List;
 import java.util.Map;
 
 import tong.lan.com.hyperledger.R;
-import tong.lan.com.hyperledger.bean.ProductBean;
+import tong.lan.com.hyperledger.bean.ProdListBean;
 import tong.lan.com.hyperledger.utils.Utils;
 
-public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class ProdListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private LayoutInflater mLayoutInflater;
     private Context mContext;
-    private List<ProductBean> mProducts;
+    private List<ProdListBean> mProducts;
     private List<String> mProductList; // 联系人名称List（转换成拼音）
-    private Map<String, ProductBean> map = new HashMap<>();
+    private Map<String, ProdListBean> map = new HashMap<>();
 
-    public ProductAdapter(Context context, List<ProductBean> products) {
+    public ProdListAdapter(Context context, List<ProdListBean> products) {
         mContext = context;
         mLayoutInflater = LayoutInflater.from(context);
         mProducts = products;
         handleData();
     }
 
-    private WageAdapter.OnMyItemClickListener listener;
-    public void setOnMyItemClickListener(WageAdapter.OnMyItemClickListener listener){
+    private WageMonAdapter.OnMyItemClickListener listener;
+    public void setOnMyItemClickListener(WageMonAdapter.OnMyItemClickListener listener){
         this.listener = listener;
 
     }
@@ -55,7 +55,7 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         mProductList = new ArrayList<>();
 
 
-        for (ProductBean mProduct : mProducts) {
+        for (ProdListBean mProduct : mProducts) {
             String pinyin = Utils.getPingYin(mProduct.getProductName());
             map.put(pinyin, mProduct);
             mProductList.add(pinyin);

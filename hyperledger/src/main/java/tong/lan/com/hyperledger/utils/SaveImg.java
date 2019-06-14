@@ -8,19 +8,13 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Environment;
-import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import org.xutils.common.util.DensityUtil;
-
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -28,8 +22,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import tong.lan.com.hyperledger.bean.WageBean;
-import tong.lan.com.hyperledger.bean.WageDetailBean;
+import tong.lan.com.hyperledger.bean.WageMonListBean;
+import tong.lan.com.hyperledger.bean.WageEmplListBean;
 
 public class SaveImg {
 
@@ -41,7 +35,7 @@ public class SaveImg {
      * @param mList    数据源
      * @return bitmap
      */
-    public static Bitmap getRecyclerItemsToBitmap(Activity activity, RecyclerView view, List<WageBean> mList, String title) {
+    public static Bitmap getRecyclerItemsToBitmap(Activity activity, RecyclerView view, List<WageMonListBean> mList, String title) {
         int allItemsHeight = 0;
         int itemWidth = view.getWidth();
         int px = 5;
@@ -156,7 +150,7 @@ public class SaveImg {
         for (int i = 0; i < mList.size(); i++) {
 
             //得到索引对应条目的JavaBean
-            WageBean item = mList.get(i);
+            WageMonListBean item = mList.get(i);
 
             //创建条目最外层布局LinearLayout
             LinearLayout childView = new LinearLayout(activity);
@@ -250,7 +244,7 @@ public class SaveImg {
         return bigBitmap;
     }
 
-    public static Bitmap getBitmapWageDetail(Activity activity, RecyclerView view, List<WageDetailBean> mList, String title, String total) {
+    public static Bitmap getBitmapWageDetail(Activity activity, RecyclerView view, List<WageEmplListBean> mList, String title, String total) {
         int allItemsHeight = 0;
         int itemWidth = view.getWidth();
         int px = 5;
@@ -375,7 +369,7 @@ public class SaveImg {
         for (int i = 0; i < mList.size(); i++) {
 
             //得到索引对应条目的JavaBean
-            WageDetailBean item = mList.get(i);
+            WageEmplListBean item = mList.get(i);
 
             //创建条目最外层布局LinearLayout
             LinearLayout childView = new LinearLayout(activity);

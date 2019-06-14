@@ -15,55 +15,62 @@ import org.xutils.x;
 
 import tong.lan.com.hyperledger.R;
 import tong.lan.com.hyperledger.domain.Employee;
+import tong.lan.com.hyperledger.domain.Product;
 
-@ContentView(R.layout.activity_update_employee)
 public class UpdateEmployeeActivity extends AppCompatActivity {
 
-    @ViewInject(R.id.update_employee_name)
     private EditText employeeName;
-    @ViewInject(R.id.update_employee_title)
-    private TextView title;
+    private TextView save;
+    private TextView cancel;
 
     int eID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        x.view().inject(this);
+        setContentView(R.layout.activity_update_employee);
+
+        employeeName = findViewById(R.id.update_employee_name);
+        save = findViewById(R.id.update_employee_save);
+        cancel = findViewById(R.id.update_employee_cancel);
+
         Intent intent = getIntent();
         eID = intent.getIntExtra("eID",0);
         employeeName.setText(intent.getStringExtra("eName"));
-        title.setText("更新员工信息");
+
+        addListener();
+
     }
 
-    //确认提交
-    @Event(value = {R.id.update_employee_save},type = View.OnClickListener.class)
-    private void submit(View v)
+    private void addListener()
     {
-        String employee_name = employeeName.getText().toString();
-        if (!employee_name.isEmpty()) {
-            Employee mEmployee = new Employee();
-            mEmployee.setEmployeeName(employee_name);
-            if (mEmployee.update(eID) == 1) {
-                Toast.makeText(this, "存储成功", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(this, "存储失败", Toast.LENGTH_SHORT).show();
+        // 确认提交
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String employee_name = employeeName.getText().toString();
+                if (employee_name.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "员工姓名为空！", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                Employee mEmployee = new Employee();
+                mEmployee.setEmployeeName(employee_name);
+                if (mEmployee.update(eID) == 1) {
+                    Toast.makeText(getApplicationContext(), "存储成功", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "存储失败", Toast.LENGTH_SHORT).show();
+                }
+                finish();
             }
-//            Intent intent = new Intent(UpdateEmployeeActivity.this, MainActivity.class);
-//            startActivity(intent);
-            finish();
-        }
-        else {
-            Toast.makeText(this, "员工姓名未填写！", Toast.LENGTH_SHORT).show();
-        }
-    }
+        });
 
-    //返回键
-    @Event(value = {R.id.update_employee_cancel},type = View.OnClickListener.class)
-    private void addEmployeeBack(View v)
-    {
-//        Intent intent = new Intent(UpdateEmployeeActivity.this, MainActivity.class);
-//        startActivity(intent);
-        finish();
+        // 取消
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 }

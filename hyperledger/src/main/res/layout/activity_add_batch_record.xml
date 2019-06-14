@@ -4,40 +4,68 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="tong.lan.com.hyperledger.activity.AddProductActivity"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@color/lightGreen">
+
         <TextView
-            android:id="@+id/add_record_cancel"
+            android:id="@+id/batch_add_record_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="取消"
-            android:textSize="20sp"
-            android:textColor="@color/white"
+            android:layout_gravity="left|center_vertical"
             android:layout_marginLeft="10dp"
-            android:layout_gravity="left|center_vertical"/>
+            android:text="取消"
+            android:textColor="@color/white"
+            android:textSize="25sp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="添加新记录"
+            android:text="批量添加"
             android:textColor="#FFF"
-            android:textSize="20sp"
+            android:textSize="25sp"
             android:layout_marginTop="5dp"
             android:layout_gravity="center_horizontal"/>
+
         <TextView
-            android:id="@+id/add_record_save"
+            android:id="@+id/batch_add_record_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="保存"
-            android:textSize="20sp"
-            android:textColor="@color/white"
+            android:layout_gravity="right|center_vertical"
             android:layout_marginRight="10dp"
-            android:layout_gravity="right|center_vertical"/>
+            android:text="保存"
+            android:textColor="@color/white"
+            android:textSize="25sp" />
     </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+        <TextView
+            android:id="@+id/batch_add_record_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="李敏"
+            android:textColor="@color/mdtp_transparent_black"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/batch_add_record_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2019年5月20日"
+            android:textColor="@color/mdtp_transparent_black"
+            android:textSize="20sp"
+            android:typeface="sans"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -46,14 +74,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:text="记录将保存到本地数据库"
-                android:textSize="12sp"
-                android:textColor="@color/color_grey"/>
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
@@ -62,47 +82,21 @@
                 android:layout_marginTop="20dp" />
 
             <TextView
-                android:id="@+id/add_record_product"
+                android:id="@+id/batch_add_record_product"
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:background="#00FFFFFF"
-                android:hint="产品"
-                android:textSize="25sp"
-                android:paddingLeft="10dp"
-                android:gravity="center_vertical"/>
-
-            <TextView
-                android:id="@+id/add_record_employee"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="#00FFFFFF"
-                android:hint="生产人"
-                android:textSize="25sp"
-                android:paddingLeft="10dp"
-                android:gravity="center_vertical"/>
-
-            <TextView
-                android:id="@+id/add_record_date"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:text="日期"
-                android:textColor="@color/color_grey"
                 android:background="@color/white"
+                android:hint="选择产品"
                 android:gravity="center_vertical"
                 android:textSize="25sp"
+                android:textColor="#000"
                 android:paddingLeft="10dp"/>
 
             <EditText
-                android:id="@+id/add_record_amount"
+                android:id="@+id/batch_add_record_amount"
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
@@ -110,8 +104,9 @@
                 android:layout_height="60dp"
                 android:background="@color/white"
                 android:hint="数量"
-                android:inputType="number"
                 android:textSize="25sp"
+                android:inputType="number"
+                android:textColor="#000"
                 android:paddingLeft="10dp"/>
 
             <View

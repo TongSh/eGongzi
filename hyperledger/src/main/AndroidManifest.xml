@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="tong.lan.com.hyperledger">
-
     <!-- 读写权限 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -14,19 +13,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/ColorTranslucentTheme">
-        <activity android:name=".activity.MainActivity">
-
-        </activity>
+        <activity android:name=".activity.AddRecordBatchActivity"/>
+        <activity
+            android:name=".activity.BatchDialogActivity"
+            android:theme="@style/Theme.AppCompat.Dialog" />
+        <activity android:name=".activity.BatchRecordActivity" />
+        <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.AddEmployeeActivity" />
         <activity android:name=".activity.AddProductActivity" />
         <activity android:name=".activity.AddRecordActivity" />
-        <activity android:name=".activity.WageDetailActivity" />
+        <activity android:name=".activity.WageEmplDetailActivity" />
         <activity android:name=".activity.UpdateEmployeeActivity" />
         <activity android:name=".activity.UpdateProductActivity" />
-        <activity android:name=".activity.SpalshActivity"
+        <activity
+            android:name=".activity.SpalshActivity"
             android:theme="@style/AppTheme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

@@ -20,7 +20,7 @@
     -->
     <list>
         <mapping class="tong.lan.com.hyperledger.domain.Employee"></mapping>
-        <mapping class="tong.lan.com.hyperledger.domain.Make"></mapping>
+        <mapping class="tong.lan.com.hyperledger.domain.Record"></mapping>
         <mapping class="tong.lan.com.hyperledger.domain.Product"></mapping>
     </list>
 </litepal>

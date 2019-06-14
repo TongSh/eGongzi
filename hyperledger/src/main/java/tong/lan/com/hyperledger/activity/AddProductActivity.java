@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.angmarch.views.NiceSpinner;
@@ -21,43 +22,61 @@ import java.util.List;
 import tong.lan.com.hyperledger.R;
 import tong.lan.com.hyperledger.domain.Product;
 
-@ContentView(R.layout.activity_add_product)
 public class AddProductActivity extends AppCompatActivity {
 
-    @ViewInject(R.id.add_product_name)
     private EditText mProductName;
-    @ViewInject(R.id.add_product_wage)
     private EditText mProductWage;
+    private TextView save;
+    private TextView cancel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        x.view().inject(this);
+        setContentView(R.layout.activity_add_product);
+        mProductName = findViewById(R.id.add_product_name);
+        mProductWage = findViewById(R.id.add_product_wage);
+        save = findViewById(R.id.add_product_save);
+        cancel = findViewById(R.id.add_product_cancel);
+
+        addListener();
     }
 
-    //确认提交
-    @Event(value = {R.id.add_product_save},type = View.OnClickListener.class)
-    private void submit(View v)
+
+    private void addListener()
     {
-        String product_name = mProductName.getText().toString();
-        double product_wage = Double.parseDouble(mProductWage.getText().toString());
-        if (!product_name.isEmpty()) {
-            Product mProduct = new Product(product_name,product_wage);
-            if (mProduct.save()) {
-                Toast.makeText(this, "存储成功", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(this, "存储失败", Toast.LENGTH_SHORT).show();
+        // 确认提交
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String product_name = mProductName.getText().toString();
+                if (product_name.isEmpty()){
+                    Toast.makeText(getApplicationContext(), "请输入产品名称！", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                if (mProductWage.getText().toString().isEmpty()){
+                    Toast.makeText(getApplicationContext(), "请输入产品单价！", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                double product_wage = Double.parseDouble(mProductWage.getText().toString());
+                Product mProduct = new Product(product_name,product_wage);
+                if (mProduct.save()) {
+                    Toast.makeText(getApplicationContext(), "存储成功", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "存储失败", Toast.LENGTH_SHORT).show();
+                }
+                finish();
             }
-            finish();
-        }
-        else {
-            Toast.makeText(this, "产品名称未填写！", Toast.LENGTH_SHORT).show();
-        }
-    }
+        });
 
-    //返回键
-    @Event(value = {R.id.add_product_cancel},type = View.OnClickListener.class)
-    private void addEmployeeBack(View v)
-    {
-        finish();
+        // 取消
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
     }
 }

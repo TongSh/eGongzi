@@ -1,9 +1,11 @@
 package tong.lan.com.hyperledger.activity;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,15 +19,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tong.lan.com.hyperledger.R;
-import tong.lan.com.hyperledger.adapter.ProductAdapter;
-import tong.lan.com.hyperledger.adapter.WageAdapter;
-import tong.lan.com.hyperledger.bean.ProductBean;
+import tong.lan.com.hyperledger.adapter.ProdListAdapter;
+import tong.lan.com.hyperledger.adapter.WageMonAdapter;
+import tong.lan.com.hyperledger.bean.ProdListBean;
+import tong.lan.com.hyperledger.domain.Employee;
 import tong.lan.com.hyperledger.domain.Product;
 
 public class TabProdFragment extends Fragment{
 
     private RecyclerView mRecyclerView;
-    private List<ProductBean> mDatas;
+    private List<ProdListBean> mDatas;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -55,7 +58,7 @@ public class TabProdFragment extends Fragment{
         int prodIcon = R.mipmap.helmet;
 
         for (Product product : products){
-            mDatas.add(new ProductBean(product.getId(),
+            mDatas.add(new ProdListBean(product.getId(),
                     product.getName(),
                     product.getWage(),
                     prodIcon));
@@ -68,9 +71,9 @@ public class TabProdFragment extends Fragment{
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(layoutManager);
         // 设置adapter
-        final ProductAdapter mAdapter = new ProductAdapter(getContext(),mDatas);
+        final ProdListAdapter mAdapter = new ProdListAdapter(getContext(),mDatas);
         // 匿名内部类，实现适配器里面定义的接口
-        mAdapter.setOnMyItemClickListener(new WageAdapter.OnMyItemClickListener(){
+        mAdapter.setOnMyItemClickListener(new WageMonAdapter.OnMyItemClickListener(){
             @Override
             public void myClick(View v, int pos) {
                 Intent intent = new Intent(getActivity(), UpdateProductActivity.class);
@@ -81,7 +84,29 @@ public class TabProdFragment extends Fragment{
 
             @Override
             public void mLongClick(View v, int pos) {
-                Toast.makeText(getActivity(),"长按---"+pos,Toast.LENGTH_LONG).show();
+                final Product product = DataSupport.find(Product.class,mAdapter.getProduct(pos));
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setIcon(R.mipmap.delete);
+                builder.setTitle("删除确认");
+                builder.setMessage("删除"+product.getName()+"的全部信息？");
+                builder.setPositiveButton("确定", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        DataSupport.delete(Product.class,product.getId());
+                        onResume();
+                    }
+                });
+                builder.setNegativeButton("取消", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+//                        Toast.makeText(BatchDialogActivity.this, "negative: " + which, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                builder.show();
             }
         });
         mRecyclerView.setAdapter(mAdapter);

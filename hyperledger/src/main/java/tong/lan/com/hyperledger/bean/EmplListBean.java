@@ -2,18 +2,18 @@ package tong.lan.com.hyperledger.bean;
 
 import java.io.Serializable;
 
-public class EmployeeListBean implements Serializable{
+public class EmplListBean implements Serializable{
     private Integer id;
     private String employeeName;//姓名
     private int mType;          // 正常显示的员工，还是字母分隔符
 
-    public EmployeeListBean(Integer id, String employeeName, int type) {
+    public EmplListBean(Integer id, String employeeName, int type) {
         this.id = id;
         this.employeeName = employeeName;
         mType = type;
     }
 
-    public EmployeeListBean(String ch, int type){
+    public EmplListBean(String ch, int type){
         id = 0;
         employeeName = ch;
         mType = type;

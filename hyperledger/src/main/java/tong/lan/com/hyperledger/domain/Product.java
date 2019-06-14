@@ -13,12 +13,12 @@ public class Product extends DataSupport {
 	private int id;
 	private String Name;//产品名称
 	private double Wage;//工人工价
-	private List<Make> make;//一个产品对应多条生产记录
+	private List<Record> record;//一个产品对应多条生产记录
 
 	public Product(String Name, double Wage) {
 		this.Name = Name;
 		this.Wage = Wage;
-		make = new ArrayList<Make>();
+		record = new ArrayList<Record>();
 	}
 
 	public Product() {
@@ -32,12 +32,12 @@ public class Product extends DataSupport {
 		this.id = id;
 	}
 
-	public List<Make> getMake() {
-		return make;
+	public List<Record> getRecord() {
+		return record;
 	}
 
-	public void setMake(List<Make> make) {
-		this.make = make;
+	public void setRecord(List<Record> record) {
+		this.record = record;
 	}
 
 	public String getName() {

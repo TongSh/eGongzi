@@ -28,10 +28,10 @@ import java.util.List;
 import java.util.Set;
 
 import tong.lan.com.hyperledger.R;
-import tong.lan.com.hyperledger.adapter.WageDetailAdapter;
-import tong.lan.com.hyperledger.bean.WageDetailBean;
+import tong.lan.com.hyperledger.adapter.WageEmplAdapter;
+import tong.lan.com.hyperledger.bean.WageEmplListBean;
 import tong.lan.com.hyperledger.domain.Employee;
-import tong.lan.com.hyperledger.domain.Make;
+import tong.lan.com.hyperledger.domain.Record;
 import tong.lan.com.hyperledger.domain.Product;
 import tong.lan.com.hyperledger.utils.DateUtil;
 import tong.lan.com.hyperledger.utils.SaveImg;
@@ -39,10 +39,10 @@ import tong.lan.com.hyperledger.utils.SaveImg;
 import static org.litepal.LitePalApplication.getContext;
 
 @ContentView(R.layout.activity_wage_detail)
-public class WageDetailActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+public class WageEmplDetailActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
 
-    List<WageDetailBean> mData;
+    List<WageEmplListBean> mData;
     @ViewInject(R.id.wage_detail_year)
     private TextView mYear;
     @ViewInject(R.id.wage_detail_month)
@@ -59,6 +59,9 @@ public class WageDetailActivity extends AppCompatActivity implements DatePickerD
     private LinearLayout mDateSearch;
     private Intent intent;
     private Employee employee;
+
+    private int year;
+    private int month;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +78,7 @@ public class WageDetailActivity extends AppCompatActivity implements DatePickerD
         int eID = intent.getIntExtra("eID",0);
         employee = DataSupport.find(Employee.class,eID);
         mToolbar.setSubtitle(employee.getEmployeeName());
-        mToolbar.inflateMenu(R.menu.wage_detailtoolbar_menu);//设置右上角的填充菜单
+        mToolbar.inflateMenu(R.menu.wage_detail_menu);//设置右上角的填充菜单
     }
 
     private void setDetail(){
@@ -83,30 +86,30 @@ public class WageDetailActivity extends AppCompatActivity implements DatePickerD
         double wage = 0;
         Set<Date> workDay = new HashSet<>();
 
-        int year = Integer.parseInt(mYear.getText().toString());
-        int month = Integer.parseInt(mMonth.getText().toString());
+        year = Integer.parseInt(mYear.getText().toString());
+        month = Integer.parseInt(mMonth.getText().toString());
         long startDay = DateUtil.date2stamp(DateUtil.getString(year,month,1));
         long endDay = DateUtil.date2stamp(DateUtil.getString(year,month+1,1));
-        List<Make> makeList = DataSupport.
-                where("makedate >= ? And makedate < ? And employee_id = ?",startDay+"",endDay+"",employee.getId()+"")
-                .order("makedate asc").find(Make.class,true);
+        List<Record> recordList = DataSupport.
+                where("date >= ? And date < ? And employee_id = ?",startDay+"",endDay+"",employee.getId()+"")
+                .order("date asc").find(Record.class,true);
 
         mData = new ArrayList<>();
-        for (Make make : makeList)
+        for (Record record : recordList)
         {
-            double singleWage = make.getMakeAmount()*make.getProduct().getWage();
+            double singleWage = record.getAmount()* record.getProduct().getWage();
             wage += singleWage;
-            workDay.add(make.getMakeDate());
-            Employee e = make.getEmployee();
-            Product p = make.getProduct();
+            workDay.add(record.getDate());
+            Employee e = record.getEmployee();
+            Product p = record.getProduct();
             Calendar calendar = Calendar.getInstance();
-            calendar.setTime(make.getMakeDate());
+            calendar.setTime(record.getDate());
             String date = DateUtil.getString(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH)+1,calendar.get(Calendar.DAY_OF_MONTH));
             date = date.split("-")[1]+"-"+date.split("-")[2];
-            mData.add(new WageDetailBean(e.getId(),
+            mData.add(new WageEmplListBean(e.getId(),
                     e.getEmployeeName(),
                     p.getName(),
-                    make.getMakeAmount(),
+                    record.getAmount(),
                     date,
                     singleWage));
         }
@@ -115,11 +118,11 @@ public class WageDetailActivity extends AppCompatActivity implements DatePickerD
         wageAverage.setText((int) (wage/workDay.size())+"");
 
         // 设置布局管理器
-        LinearLayoutManager layoutManager = new LinearLayoutManager(WageDetailActivity.this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(WageEmplDetailActivity.this);
         mRecyclerView.setLayoutManager(layoutManager);
         // 设置adapter
-        WageDetailAdapter wageDetailAdapter = new WageDetailAdapter(getContext(),mData);
-        mRecyclerView.setAdapter(wageDetailAdapter);
+        WageEmplAdapter wageEmplAdapter = new WageEmplAdapter(getContext(),mData);
+        mRecyclerView.setAdapter(wageEmplAdapter);
     }
 
     public void initListener(){
@@ -129,7 +132,7 @@ public class WageDetailActivity extends AppCompatActivity implements DatePickerD
             public void onClick(View v) {
                 Calendar now = Calendar.getInstance();
                 DatePickerDialog dpd = DatePickerDialog.newInstance(
-                        WageDetailActivity.this,
+                        WageEmplDetailActivity.this,
                         now.get(Calendar.YEAR), // Initial year selection
                         now.get(Calendar.MONTH), // Initial month selection
                         now.get(Calendar.DAY_OF_MONTH) // Inital day selection
@@ -144,7 +147,7 @@ public class WageDetailActivity extends AppCompatActivity implements DatePickerD
                 int menuItemId = item.getItemId();
                 if (menuItemId == R.id.action_share) {
                     String title = employee.getEmployeeName()+mYear.getText().toString()+"年"+mMonth.getText().toString()+"月工资";
-                    Bitmap bitmap = SaveImg.getBitmapWageDetail(WageDetailActivity.this,mRecyclerView,mData,title,wageTotal.getText().toString());
+                    Bitmap bitmap = SaveImg.getBitmapWageDetail(WageEmplDetailActivity.this,mRecyclerView,mData,title,wageTotal.getText().toString());
                     Uri path = SaveImg.saveBitmap(bitmap,title);
 
                     // 调用系统分享

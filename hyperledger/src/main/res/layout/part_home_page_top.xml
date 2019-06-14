@@ -16,7 +16,7 @@
             android:layout_weight="1" >
 
             <LinearLayout
-                android:id="@+id/home_page_record"
+                android:id="@+id/home_add_record"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -26,7 +26,7 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_gravity="center_horizontal"
-                    android:src="@mipmap/big_chat" />
+                    android:src="@mipmap/h_1" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -40,6 +40,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/home_batch_record"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1" >
@@ -54,20 +55,21 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_gravity="center_horizontal"
-                    android:src="@mipmap/big_pay" />
+                    android:src="@mipmap/h_2" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="5dp"
-                    android:text="查工资"
+                    android:text="批量记"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
             </LinearLayout>
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/home_add_empl"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1" >
@@ -82,20 +84,21 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_gravity="center_horizontal"
-                    android:src="@mipmap/big_scan" />
+                    android:src="@mipmap/h_3" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="5dp"
-                    android:text="查流水"
+                    android:text="加员工"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
             </LinearLayout>
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/home_add_prod"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1" >
@@ -110,14 +113,14 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_gravity="center_horizontal"
-                    android:src="@mipmap/big_qrcode" />
+                    android:src="@mipmap/h_4" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="5dp"
-                    android:text="更多"
+                    android:text="加产品"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
             </LinearLayout>

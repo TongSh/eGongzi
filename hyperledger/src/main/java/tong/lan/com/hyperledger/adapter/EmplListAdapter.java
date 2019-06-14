@@ -21,16 +21,16 @@ import java.util.Locale;
 import java.util.Map;
 
 import tong.lan.com.hyperledger.R;
-import tong.lan.com.hyperledger.bean.EmployeeListBean;
+import tong.lan.com.hyperledger.bean.EmplListBean;
 import tong.lan.com.hyperledger.utils.Utils;
 
-public class EmployeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class EmplListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private LayoutInflater mLayoutInflater;
     private Context mContext;
-    private List<EmployeeListBean> mEmployees; // 联系人名称字符串数组
+    private List<EmplListBean> mEmployees; // 联系人名称字符串数组
     private List<String> mEmployeeList; // 联系人名称List（转换成拼音）
-    private List<EmployeeListBean> resultList; // 最终结果（包含分组的字母）
+    private List<EmplListBean> resultList; // 最终结果（包含分组的字母）
     private List<String> characterList; // 字母List
 
     private String[] mColor;
@@ -41,7 +41,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         ITEM_TYPE_CONTACT
     }
 
-    public EmployeeAdapter(Context context, List<EmployeeListBean> employeeNames) {
+    public EmplListAdapter(Context context, List<EmplListBean> employeeNames) {
         mContext = context;
         mLayoutInflater = LayoutInflater.from(context);
         mEmployees = employeeNames;
@@ -62,8 +62,8 @@ public class EmployeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         handleData();
     }
 
-    private WageAdapter.OnMyItemClickListener listener;
-    public void setOnMyItemClickListener(WageAdapter.OnMyItemClickListener listener){
+    private WageMonAdapter.OnMyItemClickListener listener;
+    public void setOnMyItemClickListener(WageMonAdapter.OnMyItemClickListener listener){
         this.listener = listener;
 
     }
@@ -79,9 +79,9 @@ public class EmployeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private void handleData() {
         mEmployeeList = new ArrayList<>();
-        Map<String, EmployeeListBean> map = new HashMap<>();
+        Map<String, EmplListBean> map = new HashMap<>();
 
-        for (EmployeeListBean mEmployee : mEmployees) {
+        for (EmplListBean mEmployee : mEmployees) {
             String pinyin = Utils.getPingYin(mEmployee.getEmployeeName());
             map.put(pinyin, mEmployee);
             mEmployeeList.add(pinyin);
@@ -97,16 +97,16 @@ public class EmployeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             if (!characterList.contains(character)) {
                 if (character.hashCode() >= "A".hashCode() && character.hashCode() <= "Z".hashCode()) { // 是字母
                     characterList.add(character);
-                    resultList.add(new EmployeeListBean(character, ITEM_TYPE.ITEM_TYPE_CHARACTER.ordinal()));
+                    resultList.add(new EmplListBean(character, ITEM_TYPE.ITEM_TYPE_CHARACTER.ordinal()));
                 } else {
                     if (!characterList.contains("#")) {
                         characterList.add("#");
-                        resultList.add(new EmployeeListBean("#", ITEM_TYPE.ITEM_TYPE_CHARACTER.ordinal()));
+                        resultList.add(new EmplListBean("#", ITEM_TYPE.ITEM_TYPE_CHARACTER.ordinal()));
                     }
                 }
             }
 
-            resultList.add(new EmployeeListBean(map.get(name).getId(),
+            resultList.add(new EmplListBean(map.get(name).getId(),
                     map.get(name).getEmployeeName(),
                     ITEM_TYPE.ITEM_TYPE_CONTACT.ordinal()));
         }
@@ -132,7 +132,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
 
         if (holder instanceof EmployeeHolder && listener!=null) {
-            ((EmployeeAdapter.EmployeeHolder) holder).linearLayout.setOnClickListener(new View.OnClickListener() {
+            ((EmplListAdapter.EmployeeHolder) holder).linearLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     listener.myClick(v,position);
@@ -141,7 +141,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
 
             // set LongClick
-            ((EmployeeAdapter.EmployeeHolder) holder).linearLayout.setOnLongClickListener(new View.OnLongClickListener() {
+            ((EmplListAdapter.EmployeeHolder) holder).linearLayout.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
                     listener.mLongClick(v,position);

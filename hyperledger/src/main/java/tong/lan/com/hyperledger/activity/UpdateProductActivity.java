@@ -27,13 +27,8 @@ import tong.lan.com.hyperledger.domain.Product;
 @ContentView(R.layout.activity_update_product)
 public class UpdateProductActivity extends AppCompatActivity {
 
-
-//    @ViewInject(R.id.update_product_name)
     private EditText mProductName;
-//    @ViewInject(R.id.update_product_wage)
     private EditText mProductWage;
-//    @ViewInject(R.id.update_product_title)
-//    private TextView mProductTitle;
 
     Product product;
 
@@ -56,19 +51,26 @@ public class UpdateProductActivity extends AppCompatActivity {
     private void submit(View v)
     {
         String product_name = mProductName.getText().toString();
+        if (product_name.isEmpty()){
+            Toast.makeText(getApplicationContext(), "请输入产品名称！", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if (mProductWage.getText().toString().isEmpty()){
+            Toast.makeText(getApplicationContext(), "请输入产品单价！", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         double product_wage = Double.parseDouble(mProductWage.getText().toString());
-        if (!product_name.isEmpty()) {
-            Product mProduct = new Product(product_name,product_wage);
-            if (mProduct.update(product.getId()) == 1) {
-                Toast.makeText(this, "更新成功", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(this, "更新失败", Toast.LENGTH_SHORT).show();
-            }
-            finish();
+
+        Product mProduct = new Product(product_name,product_wage);
+        if (mProduct.update(product.getId()) == 1) {
+            Toast.makeText(this, "更新成功", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "更新失败", Toast.LENGTH_SHORT).show();
         }
-        else {
-            Toast.makeText(this, "产品名称未填写！", Toast.LENGTH_SHORT).show();
-        }
+        finish();
+
     }
 
     //返回键

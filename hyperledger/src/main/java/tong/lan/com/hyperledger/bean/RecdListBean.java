@@ -4,20 +4,20 @@ package tong.lan.com.hyperledger.bean;
 import tong.lan.com.hyperledger.domain.Employee;
 import tong.lan.com.hyperledger.domain.Product;
 
-public class RecordBean {
+public class RecdListBean {
     private String productInfo;//产品
     private String employeeName;//生产人
     private String recordDate;//生产日期
     private double wage;//工资
 
-    public RecordBean(String productInfo, String employeeName, String recordDate, double wage) {
+    public RecdListBean(String productInfo, String employeeName, String recordDate, double wage) {
         this.productInfo = productInfo;
         this.employeeName = employeeName;
         this.recordDate = recordDate;
         this.wage = wage;
     }
 
-    public RecordBean() {
+    public RecdListBean() {
     }
 
     public String getProductInfo() {

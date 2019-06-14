@@ -3,6 +3,7 @@ package tong.lan.com.hyperledger.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -16,6 +17,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bigkoo.pickerview.builder.TimePickerBuilder;
+import com.bigkoo.pickerview.listener.OnTimeSelectListener;
+import com.bigkoo.pickerview.view.TimePickerView;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import org.litepal.crud.DataSupport;
@@ -30,12 +34,14 @@ import java.util.Map;
 import java.util.Set;
 
 import tong.lan.com.hyperledger.R;
-import tong.lan.com.hyperledger.adapter.WageAdapter;
-import tong.lan.com.hyperledger.bean.WageBean;
+import tong.lan.com.hyperledger.adapter.WageMonAdapter;
+import tong.lan.com.hyperledger.bean.WageMonListBean;
 import tong.lan.com.hyperledger.domain.Employee;
-import tong.lan.com.hyperledger.domain.Make;
+import tong.lan.com.hyperledger.domain.Record;
 import tong.lan.com.hyperledger.utils.DateUtil;
 import tong.lan.com.hyperledger.utils.SaveImg;
+
+import static java.lang.String.format;
 
 public class TabWageFragment extends Fragment implements DatePickerDialog.OnDateSetListener {
 
@@ -46,7 +52,7 @@ public class TabWageFragment extends Fragment implements DatePickerDialog.OnDate
     private TextView wageAverage;
     private RecyclerView recyclerView;
     private FloatingActionButton floatingActionButton;
-    List<WageBean> mDatas;
+    List<WageMonListBean> mDatas;
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,  Bundle savedInstanceState) {
@@ -55,6 +61,12 @@ public class TabWageFragment extends Fragment implements DatePickerDialog.OnDate
         initListener();
         setData();
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setData();
     }
 
     public void initUnit(View v){
@@ -81,14 +93,44 @@ public class TabWageFragment extends Fragment implements DatePickerDialog.OnDate
         searchMonth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Calendar now = Calendar.getInstance();
-                DatePickerDialog dpd = DatePickerDialog.newInstance(
-                        TabWageFragment.this,
-                        now.get(Calendar.YEAR), // Initial year selection
-                        now.get(Calendar.MONTH), // Initial month selection
-                        now.get(Calendar.DAY_OF_MONTH) // Inital day selection
-                );
-                dpd.show(getActivity().getFragmentManager(), "Datepickerdialog");
+//                Calendar now = Calendar.getInstance();
+//                DatePickerDialog dpd = DatePickerDialog.newInstance(
+//                        TabWageFragment.this,
+//                        now.get(Calendar.YEAR), // Initial year selection
+//                        now.get(Calendar.MONTH), // Initial month selection
+//                        now.get(Calendar.DAY_OF_MONTH) // Inital day selection
+//                );
+//                dpd.show(getActivity().getFragmentManager(), "Datepickerdialog");
+
+                //时间选择器
+                TimePickerView pvTime = new TimePickerBuilder(getActivity(), new OnTimeSelectListener() {
+                    @Override
+                    public void onTimeSelect(Date date,View v) {//选中事件回调
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.setTime(date);
+                        mYear.setText(format("%d", calendar.get(Calendar.YEAR)));
+                        int monthOfYear = calendar.get(Calendar.MONTH) + 1;
+                        if(monthOfYear > 9)
+                            mMonth.setText(format("%d", monthOfYear));
+                        else
+                            mMonth.setText(format("0%d", monthOfYear));
+                        setData();
+                    }
+                }).setType(new boolean[]{true, true, false, false, false, false})//分别对应年月日时分秒，默认全部显示
+                        .setCancelText("取消")//取消按钮文字
+                        .setSubmitText("确定")//确认按钮文字
+                        .setContentTextSize(24)//滚轮文字大小
+                        .setTitleSize(24)//标题文字大小
+                        .setTitleText("选择月份")//标题文字
+                        .setOutSideCancelable(true)//点击屏幕，点在控件外部范围时，是否取消显示
+                        .isCyclic(false)//是否循环滚动
+                        .setTitleColor(Color.BLACK)//标题文字颜色
+                        .setSubmitColor(Color.BLUE)//确定按钮文字颜色
+                        .setCancelColor(Color.BLUE)//取消按钮文字颜色
+                        .setLabel("年","月","日","时","分","秒")
+                        .isDialog(false)//是否显示为对话框样式
+                        .build();
+                pvTime.show();
             }
         });
 
@@ -137,27 +179,28 @@ public class TabWageFragment extends Fragment implements DatePickerDialog.OnDate
         @SuppressLint("UseSparseArrays") Map<Integer,Double> wage = new HashMap<>();
         @SuppressLint("UseSparseArrays") Map<Integer,Set<Date>> workDay = new HashMap<>();
 
+        List<Employee> emplList = DataSupport.findAll(Employee.class);
+        for (Employee empl : emplList)
+        {
+            wage.put(empl.getId(), (double)0);
+            Set<Date> days = new HashSet<>();
+            workDay.put(empl.getId(), days);
+        }
+
         int year = Integer.parseInt(mYear.getText().toString());
         int month = Integer.parseInt(mMonth.getText().toString());
         long startDay = DateUtil.date2stamp(DateUtil.getString(year,month,1));
         long endDay = DateUtil.date2stamp(DateUtil.getString(year,month+1,1));
-        List<Make> makeList = DataSupport.
-                where("makedate >= ? And makedate < ?",startDay+"",endDay+"").find(Make.class,true);
+        List<Record> recordList = DataSupport.
+                where("date >= ? And date < ?",startDay+"",endDay+"").find(Record.class,true);
 
-        for (Make make : makeList)
+        for (Record record : recordList)
         {
-            int eID = make.getEmployee().getId();
-            double eWage = make.getMakeAmount()*make.getProduct().getWage();
-            if(wage.containsKey(eID)) {
-                wage.put(eID, wage.get(eID) + eWage);
-                workDay.get(eID).add(make.getMakeDate());
-            }
-            else {
-                wage.put(eID, eWage);
-                Set<Date> days = new HashSet<>();
-                days.add(make.getMakeDate());
-                workDay.put(eID, days);
-            }
+            int eID = record.getEmployee().getId();
+            double eWage = record.getAmount()* record.getProduct().getWage();
+
+            wage.put(eID, wage.get(eID) + eWage);
+            workDay.get(eID).add(record.getDate());
         }
 
         double sum = 0;
@@ -166,7 +209,7 @@ public class TabWageFragment extends Fragment implements DatePickerDialog.OnDate
             double w = wage.get(eID);
             int workdays = workDay.get(eID).size();
             Employee e = DataSupport.find(Employee.class,eID);
-            mDatas.add(new WageBean(e.getId(),e.getEmployeeName(),w,workdays));
+            mDatas.add(new WageMonListBean(e.getId(),e.getEmployeeName(),w,workdays));
             // for SUM
             sum += wage.get(eID);
         }
@@ -174,13 +217,13 @@ public class TabWageFragment extends Fragment implements DatePickerDialog.OnDate
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         // 设置adapter
-        final WageAdapter wageAdapter = new WageAdapter(getContext(),mDatas);
+        final WageMonAdapter wageMonAdapter = new WageMonAdapter(getContext(),mDatas);
         // 匿名内部类，实现适配器里面定义的接口
-        wageAdapter.setOnMyItemClickListener(new WageAdapter.OnMyItemClickListener(){
+        wageMonAdapter.setOnMyItemClickListener(new WageMonAdapter.OnMyItemClickListener(){
             @Override
             public void myClick(View v, int pos) {
-                Intent intent = new Intent(getActivity(), WageDetailActivity.class);
-                intent.putExtra("eID", wageAdapter.getEmployee(pos));
+                Intent intent = new Intent(getActivity(), WageEmplDetailActivity.class);
+                intent.putExtra("eID", wageMonAdapter.getEmployee(pos));
                 intent.putExtra("year", mYear.getText().toString());
                 intent.putExtra("month", mMonth.getText().toString());
                 startActivity(intent);
@@ -191,7 +234,7 @@ public class TabWageFragment extends Fragment implements DatePickerDialog.OnDate
                 Toast.makeText(getActivity(),"onLongClick---"+pos,Toast.LENGTH_LONG).show();
             }
         });
-        recyclerView.setAdapter(wageAdapter);
+        recyclerView.setAdapter(wageMonAdapter);
         wageToltal.setText((int) sum+"");
         wageAverage.setText((int) (sum/wage.size())+"");
     }
@@ -202,7 +245,7 @@ public class TabWageFragment extends Fragment implements DatePickerDialog.OnDate
         if(monthOfYear > 8)
             mMonth.setText((monthOfYear+1)+"");
         else
-            mMonth.setText(String.format("0%d", monthOfYear + 1));
+            mMonth.setText(format("0%d", monthOfYear + 1));
         setData();
     }
 }

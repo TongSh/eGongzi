@@ -1,7 +1,6 @@
 package tong.lan.com.hyperledger.adapter;
 
 import android.content.Context;
-import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,14 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.github.lzyzsd.randomcolor.RandomColor;
-
 import java.util.Calendar;
 import java.util.List;
 
 import tong.lan.com.hyperledger.R;
 import tong.lan.com.hyperledger.bean.DayProductBean;
-import tong.lan.com.hyperledger.bean.RecordBean;
 import tong.lan.com.hyperledger.utils.DateUtil;
 
 public class DayProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -42,7 +38,7 @@ public class DayProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ((Holder) holder).productInfo.setText(mRecords.get(position).getProductInfo());
-        ((Holder) holder).margin.setText("利润 "+(int) mRecords.get(position).getMargin());
+        ((Holder) holder).margin.setText("记录数 "+ mRecords.get(position).getNrec());
         ((Holder) holder).amount.setText(mRecords.get(position).getAmount()+"");
         Calendar now = Calendar.getInstance();
         String d = DateUtil.getString(now.get(Calendar.YEAR),now.get(Calendar.MONTH)+1,now.get(Calendar.DAY_OF_MONTH));

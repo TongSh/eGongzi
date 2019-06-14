@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/batch_record_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:layout_collapseMode="pin"
+            android:background="@color/lightGreen"
+            app:title="批量记录"
+            app:subtitle="霍金 2019年6月"
+            app:navigationIcon="@mipmap/title_bar_back"
+            app:subtitleTextColor="@color/white"
+            app:titleTextColor="@color/white"
+            android:theme="@style/Theme.ToolBar.White">
+        </android.support.v7.widget.Toolbar>
+
+        <!--<android.support.v7.widget.AppCompatTextView-->
+            <!--android:id="@+id/batch_record_date"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:text="2019年6月"-->
+            <!--android:gravity="center"-->
+            <!--android:textSize="25sp"-->
+            <!--android:textColor="#000"-->
+            <!--android:typeface="sans"/>-->
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/nsv_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/batch_record_recycler"
+                    android:dividerHeight="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </LinearLayout>
+</FrameLayout>

@@ -4,12 +4,12 @@ package tong.lan.com.hyperledger.bean;
 public class DayProductBean {
     private String productInfo;//产品
     private int amount;
-    private double margin;//利润
+    private int nrec; //记录数
 
-    public DayProductBean(String productInfo, int amount, double margin) {
+public DayProductBean(String productInfo, int amount, int nrec) {
         this.productInfo = productInfo;
         this.amount = amount;
-        this.margin = margin;
+        this.nrec = nrec;
     }
 
     public String getProductInfo() {
@@ -28,11 +28,11 @@ public class DayProductBean {
         this.amount = amount;
     }
 
-    public double getMargin() {
-        return margin;
+    public int getNrec() {
+        return nrec;
     }
 
-    public void setMargin(double margin) {
-        this.margin = margin;
+    public void setNrec(int nrec) {
+        this.nrec = nrec;
     }
 }

@@ -16,14 +16,13 @@ import com.github.lzyzsd.randomcolor.RandomColor;
 import java.util.List;
 
 import tong.lan.com.hyperledger.R;
-import tong.lan.com.hyperledger.bean.RecordBean;
-import tong.lan.com.hyperledger.bean.WageBean;
+import tong.lan.com.hyperledger.bean.WageMonListBean;
 
-public class WageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class WageMonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private LayoutInflater mLayoutInflater;
     private Context mContext;
-    private List<WageBean> mRecords;
+    private List<WageMonListBean> mRecords;
 
     private OnMyItemClickListener listener;
     public void setOnMyItemClickListener(OnMyItemClickListener listener){
@@ -40,13 +39,13 @@ public class WageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return mRecords.get(pos).getEmployeeID();
     }
 
-    public WageAdapter(Context context, List<WageBean> records) {
+    public WageMonAdapter(Context context, List<WageMonListBean> records) {
         mContext = context;
         mLayoutInflater = LayoutInflater.from(context);
         mRecords = records;
     }
 
-    public WageAdapter(){}
+    public WageMonAdapter(){}
 
 
 

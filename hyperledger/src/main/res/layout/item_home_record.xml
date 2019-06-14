@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:text="张浩"
             android:layout_marginStart="20dp"
-            android:textSize="16sp"
+            android:textSize="20sp"
             android:textColor="#000"/>
         <TextView
             android:id="@+id/item_home_record_product"
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:text="内衬621 * 100"
             android:layout_marginStart="20dp"
-            android:textSize="14sp"
+            android:textSize="18sp"
             android:textColor="@color/color_grey"/>
     </LinearLayout>
 
@@ -62,7 +62,7 @@
             android:text="09-18"
             android:layout_gravity="right"
             android:layout_marginEnd="20dp"
-            android:textSize="14sp"
+            android:textSize="18sp"
             android:textColor="@color/color_grey"/>
     </LinearLayout>
 

@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <include layout="@layout/part_tab1_top"/>
+        <include layout="@layout/part_tab_wage_top"/>
         <android.support.v7.widget.RecyclerView
             android:id="@+id/id_tab_1_wage_recycler"
             android:dividerHeight="10dp"

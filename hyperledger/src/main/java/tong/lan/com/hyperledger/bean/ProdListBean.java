@@ -1,12 +1,12 @@
 package tong.lan.com.hyperledger.bean;
 
-public class ProductBean {
+public class ProdListBean {
     private Integer id;
     private String productName;//产品名称
     private double productWage;//工价
     private int productImg;     // 图片
 
-    public ProductBean(Integer id, String productName, double productWage, int img) {
+    public ProdListBean(Integer id, String productName, double productWage, int img) {
         this.id = id;
         this.productName = productName;
         this.productWage = productWage;

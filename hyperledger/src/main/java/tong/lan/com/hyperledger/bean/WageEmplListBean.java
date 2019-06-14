@@ -1,7 +1,7 @@
 package tong.lan.com.hyperledger.bean;
 
 
-public class WageDetailBean {
+public class WageEmplListBean {
     private int employeeID;
     private String employeeName;//生产人
     private String product;
@@ -9,7 +9,7 @@ public class WageDetailBean {
     private String date;
     private double wage;//工资
 
-    public WageDetailBean(int employeeID, String employeeName, String product, int amount, String date, double wage) {
+    public WageEmplListBean(int employeeID, String employeeName, String product, int amount, String date, double wage) {
         this.employeeID = employeeID;
         this.employeeName = employeeName;
         this.product = product;
