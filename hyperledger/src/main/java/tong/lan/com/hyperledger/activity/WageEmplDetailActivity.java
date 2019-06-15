@@ -2,6 +2,7 @@ package tong.lan.com.hyperledger.activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,9 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bigkoo.pickerview.builder.TimePickerBuilder;
+import com.bigkoo.pickerview.listener.OnTimeSelectListener;
+import com.bigkoo.pickerview.view.TimePickerView;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import org.litepal.crud.DataSupport;
@@ -36,10 +40,11 @@ import tong.lan.com.hyperledger.domain.Product;
 import tong.lan.com.hyperledger.utils.DateUtil;
 import tong.lan.com.hyperledger.utils.SaveImg;
 
+import static java.lang.String.format;
 import static org.litepal.LitePalApplication.getContext;
 
 @ContentView(R.layout.activity_wage_detail)
-public class WageEmplDetailActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+public class WageEmplDetailActivity extends AppCompatActivity{
 
 
     List<WageEmplListBean> mData;
@@ -130,14 +135,35 @@ public class WageEmplDetailActivity extends AppCompatActivity implements DatePic
         mDateSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Calendar now = Calendar.getInstance();
-                DatePickerDialog dpd = DatePickerDialog.newInstance(
-                        WageEmplDetailActivity.this,
-                        now.get(Calendar.YEAR), // Initial year selection
-                        now.get(Calendar.MONTH), // Initial month selection
-                        now.get(Calendar.DAY_OF_MONTH) // Inital day selection
-                );
-                dpd.show(getFragmentManager(), "Datepickerdialog");
+                //时间选择器
+                TimePickerView pvTime = new TimePickerBuilder(getApplicationContext(), new OnTimeSelectListener() {
+                    @Override
+                    public void onTimeSelect(Date date,View v) {//选中事件回调
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.setTime(date);
+                        mYear.setText(format("%d", calendar.get(Calendar.YEAR)));
+                        int monthOfYear = calendar.get(Calendar.MONTH) + 1;
+                        if(monthOfYear > 9)
+                            mMonth.setText(format("%d", monthOfYear));
+                        else
+                            mMonth.setText(format("0%d", monthOfYear));
+                        setDetail();
+                    }
+                }).setType(new boolean[]{true, true, false, false, false, false})//分别对应年月日时分秒，默认全部显示
+                        .setCancelText("取消")//取消按钮文字
+                        .setSubmitText("确定")//确认按钮文字
+                        .setContentTextSize(24)//滚轮文字大小
+                        .setTitleSize(24)//标题文字大小
+                        .setTitleText("选择月份")//标题文字
+                        .setOutSideCancelable(true)//点击屏幕，点在控件外部范围时，是否取消显示
+                        .isCyclic(false)//是否循环滚动
+                        .setTitleColor(Color.BLACK)//标题文字颜色
+                        .setSubmitColor(Color.BLUE)//确定按钮文字颜色
+                        .setCancelColor(Color.BLUE)//取消按钮文字颜色
+                        .setLabel("年","月","日","时","分","秒")
+                        .isDialog(false)//是否显示为对话框样式
+                        .build();
+                pvTime.show();
             }
         });
 
@@ -170,15 +196,5 @@ public class WageEmplDetailActivity extends AppCompatActivity implements DatePic
                 finish();
             }
         });
-    }
-
-    @Override
-    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        mYear.setText(year+"");
-        if(monthOfYear > 8)
-            mMonth.setText((monthOfYear+1)+"");
-        else
-            mMonth.setText(String.format("0%d", monthOfYear + 1));
-        setDetail();
     }
 }

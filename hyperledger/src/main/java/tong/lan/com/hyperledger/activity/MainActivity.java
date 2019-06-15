@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements
         public void run(){
             //编写自己的线程代码
             DbBackups backups = new DbBackups(context);
-            backups.doInBackground(DbBackups.COMMAND_RESTORE);
+            backups.initLoad();
         }
     }
 

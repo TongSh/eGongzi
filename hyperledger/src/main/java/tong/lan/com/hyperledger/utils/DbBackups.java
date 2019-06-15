@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.channels.FileChannel;
 
 import tong.lan.com.hyperledger.R;
@@ -82,16 +83,37 @@ public class DbBackups extends AsyncTask<String, Void, Integer> {
         }
     }
 
-    private void initLoad(){
+    public void initLoad(){
+        //把assets目录下的db文件复制到dbpath下
+        String EXP_DIR = Environment.getExternalStorageDirectory()+ "/hyperledger/";
+        String DB_NAME = "Backup.db";
+        String dbPath = EXP_DIR + DB_NAME;
+        if (!new File(dbPath).exists()) {
+            try {
+                boolean flag = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/databases/").mkdirs();
+                boolean newFile = new File(dbPath).createNewFile();
+                try {
+                    FileOutputStream out = new FileOutputStream(dbPath);
+                    InputStream in = myContext.getAssets().open("Backup.db");
+                    byte[] buffer = new byte[1024];
+                    int readBytes = 0;
+                    while ((readBytes = in.read(buffer)) != -1)
+                        out.write(buffer, 0, readBytes);
+                    in.close();
+                    out.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // 软件的数据库
         File dbFile = myContext.getDatabasePath("WorkManager.db").getAbsoluteFile();
+        // 从assets导出的数据库
+        File backup = new File(EXP_DIR, DB_NAME);
 
-        // 需要备份的数据库路径
-        String PACKAGE_NAME = "tong.lan.com.hyperledger";
-        String DB_PATH = "/data"
-                + Environment.getDataDirectory().getAbsolutePath() + "/"
-                + PACKAGE_NAME + "/" ; // 在手机里存放数据库的位置
-
-        File backup = new File(DB_PATH, "Backup.db");
         try {
             fileCopy(backup, dbFile);
             Toast.makeText(myContext,"数据恢复成功!",Toast.LENGTH_LONG).show();

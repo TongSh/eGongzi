@@ -48,10 +48,14 @@ public class AddProductActivity extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String product_name = mProductName.getText().toString();
+                String product_name = mProductName.getText().toString().trim();
                 if (product_name.isEmpty()){
                     Toast.makeText(getApplicationContext(), "请输入产品名称！", Toast.LENGTH_LONG).show();
                     return;
+                }
+
+                if (product_name.length() > 10){
+                    Toast.makeText(getApplicationContext(),"长度超限（不超过10个字符）",Toast.LENGTH_LONG).show();
                 }
 
                 if (mProductWage.getText().toString().isEmpty()){

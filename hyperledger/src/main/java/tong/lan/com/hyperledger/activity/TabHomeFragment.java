@@ -72,6 +72,10 @@ public class TabHomeFragment extends Fragment{
         addRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int Nempl = DataSupport.count(Employee.class);
+                int Nprod = DataSupport.count(Product.class);
+                if (Nempl < 1 || Nprod < 1)
+                    return;
                 Intent intent = new Intent(getActivity(), AddRecordActivity.class);
                 startActivity(intent);
             }
@@ -79,6 +83,10 @@ public class TabHomeFragment extends Fragment{
         batchRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int Nempl = DataSupport.count(Employee.class);
+                int Nprod = DataSupport.count(Product.class);
+                if (Nempl < 1 || Nprod < 1)
+                    return;
                 Intent intent = new Intent(getActivity(), BatchRecordActivity.class);
                 intent.putExtra("eID", DataSupport.findFirst(Employee.class).getId());
                 Calendar calendar = Calendar.getInstance();

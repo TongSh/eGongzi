@@ -93,14 +93,6 @@ public class TabWageFragment extends Fragment implements DatePickerDialog.OnDate
         searchMonth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Calendar now = Calendar.getInstance();
-//                DatePickerDialog dpd = DatePickerDialog.newInstance(
-//                        TabWageFragment.this,
-//                        now.get(Calendar.YEAR), // Initial year selection
-//                        now.get(Calendar.MONTH), // Initial month selection
-//                        now.get(Calendar.DAY_OF_MONTH) // Inital day selection
-//                );
-//                dpd.show(getActivity().getFragmentManager(), "Datepickerdialog");
 
                 //时间选择器
                 TimePickerView pvTime = new TimePickerBuilder(getActivity(), new OnTimeSelectListener() {

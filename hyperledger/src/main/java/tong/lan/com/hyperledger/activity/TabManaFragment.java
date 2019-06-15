@@ -1,8 +1,10 @@
 package tong.lan.com.hyperledger.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,7 @@ import java.util.Calendar;
 
 import tong.lan.com.hyperledger.R;
 import tong.lan.com.hyperledger.domain.Employee;
+import tong.lan.com.hyperledger.domain.Product;
 import tong.lan.com.hyperledger.utils.DbBackups;
 
 public class TabManaFragment extends Fragment{
@@ -53,8 +56,12 @@ public class TabManaFragment extends Fragment{
         addRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            Intent intent = new Intent(getActivity(), AddRecordActivity.class);
-            startActivity(intent);
+                int Nempl = DataSupport.count(Employee.class);
+                int Nprod = DataSupport.count(Product.class);
+                if (Nempl < 1 || Nprod < 1)
+                    return;
+                Intent intent = new Intent(getActivity(), AddRecordActivity.class);
+                startActivity(intent);
             }
         });
         addEmpl.setOnClickListener(new View.OnClickListener() {
@@ -94,16 +101,56 @@ public class TabManaFragment extends Fragment{
         opBackup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ThreadDemo threadDemo = new ThreadDemo();
-                threadDemo.run();
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setIcon(R.mipmap.delete);
+                builder.setTitle("备份确认");
+                builder.setMessage("导出当前数据库全部信息？");
+                builder.setPositiveButton("确定", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        ThreadDemo threadDemo = new ThreadDemo();
+                        threadDemo.run();
+                    }
+                });
+                builder.setNegativeButton("取消", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+//                        Toast.makeText(BatchDialogActivity.this, "negative: " + which, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                builder.show();
             }
         });
 
         opRecover.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ThreadRecover threadRecover = new ThreadRecover();
-                threadRecover.run();
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setIcon(R.mipmap.delete);
+                builder.setTitle("恢复确认");
+                builder.setMessage("导入备份文件到当前数据库？");
+                builder.setPositiveButton("确定", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        ThreadRecover threadRecover = new ThreadRecover();
+                        threadRecover.run();
+                    }
+                });
+                builder.setNegativeButton("取消", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+//                        Toast.makeText(BatchDialogActivity.this, "negative: " + which, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                builder.show();
             }
         });
 

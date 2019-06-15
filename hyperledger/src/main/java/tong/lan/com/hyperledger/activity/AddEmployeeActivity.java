@@ -38,9 +38,14 @@ public class AddEmployeeActivity extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            String employee_name = employeeName.getText().toString();
+            String employee_name = employeeName.getText().toString().trim();
             if (employee_name.isEmpty()) {
                 Toast.makeText(getApplicationContext(), "员工姓名为空！", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (employee_name.length() > 6){
+                Toast.makeText(getApplicationContext(), "长度超限（不超过6个字符）", Toast.LENGTH_SHORT).show();
                 return;
             }
 
