@@ -80,16 +80,21 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private void loadDb(){
-        SharedPreferences sharedPreferences = getSharedPreferences("FirstRun",0);
-        Boolean first_run = sharedPreferences.getBoolean("First",true);
-        if (first_run){
-            sharedPreferences.edit().putBoolean("First",false).commit();
-            ThreadRecover threadRecover = new ThreadRecover();
-            threadRecover.run();
+        PackageManager pm = getPackageManager();
+
+        boolean permission = (PackageManager.PERMISSION_GRANTED ==
+                pm.checkPermission("android.permission.WRITE_EXTERNAL_STORAGE", "tong.lan.com.hyperledger"));
+        if (permission) {
+            Toast.makeText(this,"已授权！",Toast.LENGTH_LONG).show();
+            SharedPreferences sharedPreferences = getSharedPreferences("FirstRun", 0);
+            boolean first_run = sharedPreferences.getBoolean("First", true);
+            if (first_run) {
+                sharedPreferences.edit().putBoolean("First", false).apply();
+                ThreadRecover threadRecover = new ThreadRecover();
+                threadRecover.run();
 //            Toast.makeText(this,"第一次",Toast.LENGTH_LONG).show();
-        }
-        else {
-//            Toast.makeText(this,"不是第一次",Toast.LENGTH_LONG).show();
+            }
+
         }
     }
 

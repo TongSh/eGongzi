@@ -86,11 +86,11 @@ public class DbBackups extends AsyncTask<String, Void, Integer> {
     public void initLoad(){
         //把assets目录下的db文件复制到dbpath下
         String EXP_DIR = Environment.getExternalStorageDirectory()+ "/hyperledger/";
-        String DB_NAME = "Backup.db";
+        String DB_NAME = "BackupInit.db";
         String dbPath = EXP_DIR + DB_NAME;
         if (!new File(dbPath).exists()) {
             try {
-                boolean flag = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/databases/").mkdirs();
+                boolean flag = new File(EXP_DIR).mkdirs();
                 boolean newFile = new File(dbPath).createNewFile();
                 try {
                     FileOutputStream out = new FileOutputStream(dbPath);
